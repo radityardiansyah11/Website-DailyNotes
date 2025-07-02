@@ -71,8 +71,62 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 })
 
-/* modal main view note */
+/* auto height textarea ADD NOTE */
+//head
 document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.getElementById('autoTextAreaHead')
+
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto'
+        this.style.height = this.scrollHeight + 'px'
+    })
+    textarea.dispatchEvent(new Event('input'))
+})
+
+//content
+document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.getElementById('autoTextAreaContent')
+
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto'
+        this.style.height = this.scrollHeight + 'px'
+    })
+    textarea.dispatchEvent(new Event('input'))
+})
+
+/* auto height textarea VIEW NOTE */
+//head
+document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.getElementById('textAreaNoteHead')
+
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto'
+        this.style.height = this.scrollHeight + 'px'
+    })
+    textarea.dispatchEvent(new Event('input'))
+})
+
+//content
+document.addEventListener("DOMContentLoaded", () => {
+    const textarea = document.getElementById('textAreaNoteContent')
+
+    textarea.addEventListener('input', function () {
+        this.style.height = 'auto'
+        this.style.height = this.scrollHeight + 'px'
+    })
+    textarea.dispatchEvent(new Event('input'))
+})
+
+
+
+
+
+
+
+
+
+/* modal main view note */
+/* document.addEventListener("DOMContentLoaded", () => {
     function openNoteModal(title, content) {
         document.getElementById('modalNoteTitle').innerText = title;
         document.getElementById('modalNoteContent').innerText = content;
@@ -91,3 +145,4 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+ */

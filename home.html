@@ -66,26 +66,27 @@
                 <!-- Actions -->
                 <div class="flex items-center gap-4">
                     <!-- button add -->
-                    <button type="button" data-modal-target="default-modal" data-modal-toggle="default-modal"
-                        class="bg-gradient-to-r from-red-600 to-orange-600 text-white rounded-3xl px-5 py-2.5 text-sm font-medium"
+                    <button type="button" data-modal-target="modalAddNote" data-modal-toggle="modalAddNote"
+                        class="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white rounded-3xl px-5 py-2.5 text-sm font-medium"
                         href="#">Add Notes</button>
-                    <!-- Main modal -->
-                    <div id="default-modal" tabindex="-1" aria-hidden="true"
-                        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-                        <div class="relative p-4 w-full max-w-lg max-h-full">
+
+                    <!-- modal add note -->
+                    <div id="modalAddNote" tabindex="-1" aria-hidden="true"
+                        class="hidden overflow-y-auto  fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+                        <div class="relative p-4 w-full max-w-xl">
                             <!-- Modal content -->
-                            <div class="relative bg-white rounded-3xl shadow-sm">
+                            <div
+                                class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden no-scrollbar">
                                 <!-- Modal body -->
-                                <div class="flex p-4 md:p-5 h-full grid grid-col-2 gap-3">
-                                    <textarea type="text" placeholder="Header"
-                                        class="w-full h-full md:h-16 p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
-                                    <textarea type="text" placeholder="text"
-                                        class="w-full h-80 p-4 text-md bg-gray-100 placeholder:text-md align-start focus:outline-none"></textarea>
+                                <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
+                                    <textarea id="autoTextAreaHead" rows="1" type="text" placeholder="Title"
+                                        class="w-full h-full md:min-h-16 p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none "></textarea>
+                                    <textarea id="autoTextAreaContent" type="text" placeholder="text"
+                                        class="w-full h-full md:min-h-96 p-4 text-md bg-gray-100 placeholder:text-md align-start focus:outline-none no-scrollbar"></textarea>
                                 </div>
-                                <!-- Modal footer -->
                                 <div
-                                    class="flex justify-end items-end p-4 md:p-5 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                    <button class="flex font-semibold text-white">Add Note</button>
+                                    class="flex justify-end p-4 md:p-5 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                                    <button type="button" class="flex font-semibold text-white">Add Note</button>
                                 </div>
                             </div>
                         </div>
@@ -111,10 +112,6 @@
                                 </div>
                                 <h2 class="mt-3 text-gray-900 text-xl font-normal font-semibold">Halo, Raditya.</h2>
                                 <p class="flex text-sm text-gray-500">raditya.ardiansyah@gmail.com</p>
-                                <!--  <button
-                                        class="mt-4 px-4 py-1 border border-gray-500 rounded-full text-sm text-[#8ab4f8] hover:underline focus:outline-none">
-                                        Kelola Akun Anda
-                                    </button> -->
                                 <div class="flex flex-row gap-2 w-full">
                                     <button
                                         class="w-24 mt-4 flex-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-full py-2 text-white text-sm font-semibold hover:bg-[#3c4043] focus:outline-none">
@@ -153,7 +150,8 @@
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
                     <!-- note -->
 
-                    <div id="noteMain" class="relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
+                    <div id="noteMain"
+                        class="relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
                         data-pinned="false">
                         <h2 class="font-semibold">Kegiatan hari ini</h2>
                         <p class="text-sm mt-3">Ini saya coba kasih contoh isi dari catatan saya, saya sedang mencatat
@@ -179,6 +177,16 @@
                                 </div>
                             </button>
 
+                            <button type="button" data-tooltip-target="edit-no-arrow" data-tooltip-placement="bottom"
+                                data-modal-target="modalViewNote" data-modal-toggle="modalViewNote"
+                                class="text-gray-400 hover:text-gray-500">
+                                <i class="fa fa-edit"></i>
+                                <div id="edit-no-arrow" role="tooltip"
+                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                    Edit
+                                </div>
+                            </button>
+
                             <button type="button" data-modal-target="trash-modal" data-modal-toggle="trash-modal"
                                 data-tooltip-placement="bottom" data-tooltip-target="trash-no-arrow"
                                 class="text-gray-400 hover:text-gray-500">
@@ -188,47 +196,37 @@
                                     Delete
                                 </div>
                             </button>
-
-                            <!-- <button type="button" class="text-gray-400 hover:text-gray-500">
-                                <i class="fa fa-ellipsis-v"></i>
-                            </button> -->
+                        </div>
+                        <!-- modal add note -->
+                        <div id="modalViewNote" tabindex="-1" aria-hidden="true"
+                            class="hidden overflow-y-auto  fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+                            <div class="relative p-4 w-full max-w-xl">
+                                <!-- Modal content -->
+                                <div
+                                    class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden no-scrollbar">
+                                    <!-- Modal body -->
+                                    <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
+                                        <textarea id="textAreaNoteHead" rows="1" type="text" placeholder="Title"
+                                            class="w-full h-full md:min-h-16 p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none "></textarea>
+                                        <textarea id="textAreaNoteContent" type="text" placeholder="text"
+                                            class="w-full h-full md:min-h-96 p-4 text-md bg-gray-100 placeholder:text-md align-start focus:outline-none no-scrollbar"></textarea>
+                                    </div>
+                                    <div
+                                        class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                                        <p class="flex text-xs text-white md:mt-1">last update 25 Jan</p>
+                                        <button type="button" class="flex font-semibold text-white">Save</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                
-                <!-- modal main view note -->
-                <div id="note-preview-modal" tabindex="-1"
-                    class="hidden fixed inset-0 z-50 overflow-y-auto bg-black bg-opacity-50 flex items-center justify-center">
-                    <div class="bg-white rounded-3xl shadow-lg w-full max-w-3xl p-6 relative">
-                        <button type="button" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600"
-                            onclick="closeNoteModal()">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
-                        <h2 id="modalNoteTitle" class="text-xl font-semibold mb-4">Note Title</h2>
-                        <p id="modalNoteContent" class="text-gray-700">Note content goes here...</p>
-                    </div>
-                </div>
-
 
                 <!-- modal main trash-->
                 <div id="trash-modal" tabindex="-1"
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="p-4 w-112 max-h-full">
                         <div class="relative bg-white rounded-3xl shadow-sm">
-
-                            <button type="button"
-                                class="absolute top-3 end-2.5 text-gray-200 bg-transparent hover:bg-gray-100 hover:text-gray-400 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center :hover:text-white"
-                                data-modal-hide="trash-modal">
-                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                    viewBox="0 0 14 14">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                                </svg>
-                                <span class="sr-only">Close modal</span>
-                            </button>
-
                             <div class="p-4 md:p-5 text-center">
                                 <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
