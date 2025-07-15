@@ -23,6 +23,14 @@ Route::post('/logout', function () {
     return redirect('/login');
 })->name('logout');
 
+// Hanya bisa diakses oleh tamu (belum login)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest');
+
+// Harus login
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+
+
 //page
 Route::get('/login', function () {
     return view('login');
