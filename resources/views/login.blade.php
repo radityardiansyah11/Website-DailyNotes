@@ -69,7 +69,7 @@
             <a class="flex justify-center text-2xl font-semibold my-4">Register</a>
             <div class="w-full max-w-xl mb-3">
                 <a class="flex flex-col text-white mb-1 ms-1">Username</a>
-                <input type="text" placeholder="Username" name="username"
+                <input type="text" placeholder="Username" name="name"
                     class="flex w-full max-w-xs h-10 bg-white rounded-lg p-3 text-gray-900 focus:outline-none">
             </div>
             <div class="w-full max-w-xl mb-3">

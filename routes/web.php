@@ -2,8 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\AuthController;//loginController   
+use App\Http\Controllers\NoteController; //noteController
+use App\Http\Controllers\HomeController;//homeController
 
+/* Login System  */
 Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('guest')->name('login');
 Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
 
@@ -22,16 +25,22 @@ Route::post('/logout', function () {
     request()->session()->regenerateToken();
     return redirect('/login');
 })->name('logout');
-
 // Hanya bisa diakses oleh tamu (belum login)
 Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest');
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest');
-
 // Harus login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+/* Note */
+Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
 
-//page
+/* pin */
+Route::post('/notes/{id}/pin', [NoteController::class, 'togglePin']);
+
+/* home */
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
+
+/* page */
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -47,10 +56,6 @@ Route::get('/indexArchive', function () {
 Route::get('/indexNotification', function () {
     return view('indexNotification');
 })->name('indexNotification');
-
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
 
 Route::get('/archive', function () {
     return view('archive');

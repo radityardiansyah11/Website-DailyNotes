@@ -16,13 +16,13 @@ class AuthController extends Controller
         \Log::info($request->all());
 
         $request->validate([
-            'username' => 'required|unique:userData,username',
-            'email' => 'required|email|unique:userData,email',
+            'name' => 'required|unique:users,name',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|min:6',
         ]);
 
         $user = User::create([
-            'username' => $request->username,
+            'name' => $request->name,
             'email' => $request->email,
             'password' => \Hash::make($request->password),
         ]);

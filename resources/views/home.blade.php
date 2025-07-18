@@ -77,19 +77,22 @@
                         <div class="relative p-4 w-full max-w-xl">
 
                             <!-- Modal content -->
-                            <div
-                                class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden no-scrollbar">
-                                <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
-                                    <textarea id="autoTextAreaHead" rows="1" type="text" placeholder="Title"
-                                        class="w-full h-full md:min-h-16 p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none "></textarea>
-                                    <textarea id="autoTextAreaContent" type="text" placeholder="text"
-                                        class="w-full h-full md:min-h-96 p-4 text-md bg-gray-100 placeholder:text-md align-start focus:outline-none no-scrollbar"></textarea>
-                                </div>
+                            <form method="POST" action="{{ route('notes.store') }}">
+                                @csrf
                                 <div
-                                    class="flex justify-end p-4 md:p-5 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                    <button type="button" class="flex font-semibold text-white">Add Note</button>
+                                    class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden no-scrollbar">
+                                    <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
+                                        <textarea id="autoTextAreaHead" name="title" rows="1" type="text" placeholder="Title"
+                                            class="w-full h-full md:min-h-16 p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none "></textarea>
+                                        <textarea id="autoTextAreaContent" name="content" type="text" placeholder="text"
+                                            class="w-full h-full md:min-h-96 p-4 text-md bg-gray-100 placeholder:text-md align-start focus:outline-none no-scrollbar"></textarea>
+                                    </div>
+                                    <div
+                                        class="flex justify-end p-4 md:p-5 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                                        <button type="submit" class="flex font-semibold text-white">Add Note</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
 
@@ -111,8 +114,9 @@
                                         src="https://storage.googleapis.com/a1aa/image/778a18a0-4a4f-46b0-57e0-c4f3909279ce.jpg"
                                         alt="Profile image" />
                                 </div>
-                                <h2 class="mt-3 text-gray-900 text-xl font-normal font-semibold">Halo, {{ Auth::user()->username }}</h2>
-                                <p class="flex text-sm text-gray-500">{{ Auth::user()->email}}</p>
+                                <h2 class="mt-3 text-gray-900 text-xl font-normal font-semibold">Halo,
+                                    {{ Auth::user()->name }}</h2>
+                                <p class="flex text-sm text-gray-500">{{ Auth::user()->email }}</p>
                                 <div class="flex flex-row gap-2 w-full">
                                     <button
                                         class="w-24 mt-4 flex-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-full py-2 text-white text-sm font-semibold hover:bg-[#3c4043] focus:outline-none">
@@ -159,7 +163,7 @@
                                             </button>
                                         </form>
 
-                                        <button data-modal-hide="trash-modal" type="button"
+                                        <button id="cancelBtn" type="button" data-modal-hide="trash-modal"
                                             class="py-2.5 px-5 ms-3 text-sm font-medium bg-gray-100 text-gray-600 focus:outline-none rounded-3xl">No,
                                             cancel</button>
                                     </div>
@@ -172,87 +176,71 @@
 
             <!-- content -->
             <section class="flex flex-col mt-2 md:mt-3">
-                <!-- pin note -->
+                <!-- PIN NOTES -->
                 <a class="text-xs text-gray-400 mb-3 font-semibold" id="addPinNotes">PIN NOTES</a>
                 <div id="pinNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
-                    <!-- nanti isi note yang di pin -->
+                    <!-- isi note yg dipin secara dinamis -->
                 </div>
 
+                <!-- OTHER NOTES -->
                 <a class="text-xs text-gray-400 mb-3 font-semibold">OTHER NOTES</a>
-                <!-- main note -->
                 <div id="mainNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
-                    <!-- note -->
+                    @foreach ($notes as $note)
+                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
+                            data-id="{{ $note->id }}" data-pinned="{{ $note->pinned ? 'true' : 'false' }}">
 
-                    <div id="noteMain"
-                        class="relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
-                        data-pinned="false">
-                        <h2 class="font-semibold">Kegiatan hari ini</h2>
-                        <p class="text-sm mt-3">Ini saya coba kasih contoh isi dari catatan saya, saya sedang mencatat
-                            catatan harian saya disini. hari ini saya sedang bekerja di sini, saya ingin pulang nanti
-                            sore</p>
-                        <div
-                            class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
-                            <button type="button" data-tooltip-target="pin-no-arrow" data-tooltip-placement="bottom"
-                                class="text-gray-400 hover:text-gray-500">
-                                <i class="fas fa-thumbtack"></i>
-                                <div id="pin-no-arrow" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
-                                    Pin
-                                </div>
-                            </button>
+                            <h2 class="font-semibold">{{ $note->title }}</h2>
+                            <p class="text-sm mt-3">{{ Str::limit($note->content, 100) }}</p>
 
-                            <button type="button" data-tooltip-target="archive-no-arrow"
-                                data-tooltip-placement="bottom" class="text-gray-400 hover:text-gray-500">
-                                <i class="fas fa-archive"></i>
-                                <div id="archive-no-arrow" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600">
-                                    Archive
-                                </div>
-                            </button>
+                            <div
+                                class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
+                                <!-- Pin -->
+                                <button class="pin-btn text-gray-400 hover:text-gray-500" data-id="{{ $note->id }}">
+                                    <i class="fas fa-thumbtack"></i>
+                                </button>
 
-                            <button type="button" data-tooltip-target="edit-no-arrow"
-                                data-tooltip-placement="bottom" data-modal-target="modalViewNote"
-                                data-modal-toggle="modalViewNote" class="text-gray-400 hover:text-gray-500">
-                                <i class="fa fa-edit"></i>
-                                <div id="edit-no-arrow" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
-                                    Edit
-                                </div>
-                            </button>
+                                <!-- Archive -->
+                                <button type="button" class="text-gray-400 hover:text-gray-500">
+                                    <i class="fas fa-archive"></i>
+                                </button>
 
-                            <button type="button" data-modal-target="modalDeleteNote"
-                                data-modal-toggle="modalDeleteNote" data-tooltip-placement="bottom"
-                                data-tooltip-target="trash-no-arrow" class="text-gray-400 hover:text-gray-500">
-                                <i class="fa fa-trash"></i>
-                                <div id="trash-no-arrow" role="tooltip"
-                                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600">
-                                    Delete
-                                </div>
-                            </button>
+                                <!-- Edit -->
+                                <button type="button" class="text-gray-400 hover:text-gray-500 edit-btn"
+                                    data-id="{{ $note->id }}" data-title="{{ $note->title }}"
+                                    data-content="{{ $note->content }}" data-modal-target="modalViewNote"
+                                    data-modal-toggle="modalViewNote">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+
+                                <!-- Delete -->
+                                <button type="button" class="text-gray-400 hover:text-gray-500"
+                                    data-modal-target="modalDeleteNote" data-modal-toggle="modalDeleteNote">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
                         </div>
+                    @endforeach
+                </div>
 
-                        <!-- modal add note -->
-                        <div id="modalViewNote" tabindex="-1" aria-hidden="true"
-                            class="hidden overflow-y-auto  fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
-                            <div class="relative p-4 w-full max-w-xl">
-                                <!-- Modal content -->
-                                <div
-                                    class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden no-scrollbar">
-                                    <!-- Modal body -->
-                                    <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
-                                        <textarea id="textAreaNoteHead" rows="1" type="text" placeholder="Title"
-                                            class="w-full h-full md:min-h-16 p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none "></textarea>
-                                        <textarea id="textAreaNoteContent" type="text" placeholder="text"
-                                            class="w-full h-full md:min-h-96 p-4 text-md bg-gray-100 placeholder:text-md align-start focus:outline-none no-scrollbar"></textarea>
-                                    </div>
-                                    <div
-                                        class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                        <p class="flex text-xs text-white md:mt-1">last update 25 Jan</p>
-                                        <button type="button" class="flex font-semibold text-white">Save</button>
-                                    </div>
-                                </div>
+                <!-- MODAL VIEW NOTE -->
+                <div id="modalViewNote" tabindex="-1" aria-hidden="true"
+                    class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+                    <div class="relative p-4 w-full max-w-xl">
+                        <div
+                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden">
+                            <!-- Body -->
+                            <div class="p-3 md:p-4 overflow-y-auto max-h-screen">
+                                <textarea id="textAreaNoteHead" rows="1" placeholder="Title"
+                                    class="w-full p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
+                                <textarea id="textAreaNoteContent" placeholder="Text"
+                                    class="w-full p-4 text-md bg-gray-100 placeholder:text-md focus:outline-none no-scrollbar"></textarea>
+                            </div>
+                            <div
+                                class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                                <p class="flex text-xs text-white md:mt-1">last update 25 Jan</p>
+                                <button id="saveNoteBtn" type="button" class="flex font-semibold text-white">Save</button>
                             </div>
                         </div>
                     </div>
