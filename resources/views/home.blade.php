@@ -11,6 +11,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Alata&family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
 </head>
 
 <body class="bg-gray-100 min-h-screen md:h-screen flex p-3 sm:p-5">
@@ -191,13 +193,14 @@
                         <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
                             data-id="{{ $note->id }}" data-pinned="{{ $note->pinned ? 'true' : 'false' }}">
 
-                            <h2 class="font-semibold">{{ $note->title }}</h2>
-                            <p class="text-sm mt-3">{{ Str::limit($note->content, 100) }}</p>
+                            <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>
+                            <p class="text-sm mt-3 break-all">{{ Str::limit($note->content, 170) }}</p>
 
                             <div
                                 class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
                                 <!-- Pin -->
-                                <button class="pin-btn text-gray-400 hover:text-gray-500" data-id="{{ $note->id }}">
+                                <button class="pin-btn text-gray-400 hover:text-gray-500"
+                                    data-id="{{ $note->id }}">
                                     <i class="fas fa-thumbtack"></i>
                                 </button>
 
@@ -215,8 +218,9 @@
                                 </button>
 
                                 <!-- Delete -->
-                                <button type="button" class="text-gray-400 hover:text-gray-500"
-                                    data-modal-target="modalDeleteNote" data-modal-toggle="modalDeleteNote">
+                                <button type="button" class="text-gray-400 hover:text-gray-500 open-delete-modal"
+                                    data-id="{{ $note->id }}" data-modal-target="modalDeleteNote"
+                                    data-modal-toggle="modalDeleteNote">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>
@@ -229,18 +233,19 @@
                     class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
                     <div class="relative p-4 w-full max-w-xl">
                         <div
-                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-hidden">
+                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto">
                             <!-- Body -->
                             <div class="p-3 md:p-4 overflow-y-auto max-h-screen">
                                 <textarea id="textAreaNoteHead" rows="1" placeholder="Title"
-                                    class="w-full p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
+                                    class="w-full  p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
                                 <textarea id="textAreaNoteContent" placeholder="Text"
                                     class="w-full p-4 text-md bg-gray-100 placeholder:text-md focus:outline-none no-scrollbar"></textarea>
                             </div>
                             <div
                                 class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
                                 <p class="flex text-xs text-white md:mt-1">last update 25 Jan</p>
-                                <button id="saveNoteBtn" type="button" class="flex font-semibold text-white">Save</button>
+                                <button id="saveNoteBtn" type="button"
+                                    class="flex font-semibold text-white">Save</button>
                             </div>
                         </div>
                     </div>
@@ -259,11 +264,13 @@
                                 </svg>
                                 <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
                                     you sure you want to delete this note?</h3>
-                                <button data-modal-hide="trash-modal" type="button"
-                                    class="text-white bg-gradient-to-r from-red-600 to-orange-600 font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center">
+
+                                <button data-modal-hide="trash-modal" type="button" id="confirmDeleteBtn"
+                                    class="text-white bg-gradient-to-r from-red-600 to-orange-600 font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center  ">
                                     Yes, I'm sure
                                 </button>
                                 <button data-modal-hide="trash-modal" type="button"
+                                    onclick="document.getElementById('modalDeleteNote').classList.add('hidden')"
                                     class="py-2.5 px-5 ms-3 text-sm font-medium bg-gray-100 text-gray-600 focus:outline-none rounded-3xl">No,
                                     cancel</button>
                             </div>

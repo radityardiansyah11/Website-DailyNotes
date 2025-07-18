@@ -40,6 +40,9 @@ Route::post('/notes/{id}/pin', [NoteController::class, 'togglePin']);
 /* home */
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
+/* delete note */
+Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
+
 /* page */
 Route::get('/login', function () {
     return view('login');

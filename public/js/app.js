@@ -110,12 +110,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* auto height textarea VIEW NOTE */
 //head
-document.addEventListener("DOMContentLoaded", () => {
+/* document.addEventListener("DOMContentLoaded", () => {
     const textarea = document.getElementById('textAreaNoteHead')
 
     textarea.addEventListener('input', function () {
         this.style.height = 'auto'
-        this.style.height = this.scrollHeight + 'px'
+        this.style.height = this.scrollHeight + '8px'
     })
     textarea.dispatchEvent(new Event('input'))
 })
@@ -126,10 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     textarea.addEventListener('input', function () {
         this.style.height = 'auto'
-        this.style.height = this.scrollHeight + 'px'
+        this.style.height = this.scrollHeight + '8px'
     })
     textarea.dispatchEvent(new Event('input'))
-})
+}) */
 
 /* cancel button modal */
 document.addEventListener("DOMContentLoaded", function () {
@@ -141,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 })
 
-/* edit data modal */
+/* edit data modal dan view data heighyt */
 document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll('.edit-btn');
     const modal = document.getElementById('modalViewNote');
@@ -156,11 +156,60 @@ document.addEventListener("DOMContentLoaded", () => {
             titleInput.value = title;
             contentInput.value = content;
 
-            // Optional: auto resize height
-            titleInput.dispatchEvent(new Event('input'));
-            contentInput.dispatchEvent(new Event('input'));
-
             modal.classList.remove('hidden');
+
+            // Tunggu render modal baru atur ulang tinggi textarea
+            setTimeout(() => {
+                titleInput.style.height = 'auto';
+                titleInput.style.height = titleInput.scrollHeight + 'px';
+
+                contentInput.style.height = 'auto';
+                contentInput.style.height = contentInput.scrollHeight + 'px';
+            }, 10); // atau 50ms kalau masih kurang
         });
     });
+
 });
+
+/* delete button */
+let noteIdToDelete = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+    document.querySelectorAll(".open-delete-modal").forEach(btn => {
+        btn.addEventListener("click", function () {
+            noteIdToDelete = this.getAttribute("data-id");
+            document.getElementById("modalDeleteNote")?.classList.remove("hidden");
+        });
+    });
+
+    document.getElementById("confirmDeleteBtn")?.addEventListener("click", async function () {
+        if (!noteIdToDelete) return;
+
+        try {
+            const response = await fetch(`/notes/${noteIdToDelete}`, {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken,
+                    'Accept': 'application/json',
+                },
+            });
+
+            const result = await response.json();
+
+            if (result.success) {
+                window.location.reload(); // Refresh halaman
+            }
+
+        } catch (error) {
+            console.error(error);
+            alert("Terjadi kesalahan.");
+        }
+    });
+});
+
+
+
+
