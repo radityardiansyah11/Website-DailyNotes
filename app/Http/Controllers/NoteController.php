@@ -63,6 +63,24 @@ class NoteController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->get('q');
+        $userId = auth()->id();
+
+        $results = Note::where('user_id', $userId)
+            ->where('is_archived', false)
+            ->where(function ($q) use ($query) {
+                $q->where('title', 'like', "%$query%")
+                    ->orWhere('content', 'like', "%$query%");
+            })
+            ->orderBy('is_pinned', 'desc')
+            ->latest()
+            ->get();
+
+        return response()->json($results);
+    }
+    
 
 }
 

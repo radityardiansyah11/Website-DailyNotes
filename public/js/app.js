@@ -162,7 +162,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('modalViewNote');
     const titleInput = document.getElementById('textAreaNoteHead');
     const contentInput = document.getElementById('textAreaNoteContent');
-    
+
     // Tambahkan global variable
     let currentNoteId = null;
 
@@ -204,14 +204,14 @@ document.addEventListener("DOMContentLoaded", () => {
             },
             body: JSON.stringify({ title, content })
         })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                location.reload();
-            } else {
-                alert("Gagal update note.");
-            }
-        });
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    location.reload();
+                } else {
+                    alert("Gagal update note.");
+                }
+            });
     });
 });
 
@@ -252,6 +252,49 @@ document.addEventListener("DOMContentLoaded", () => {
             console.error(error);
             alert("Terjadi kesalahan.");
         }
+    });
+});
+
+/* search bar */
+document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('searchInput');
+    const mainNotesContainer = document.getElementById('mainNotes');
+    const pinNotesContainer = document.getElementById('pinNotes');
+
+    searchInput.addEventListener('input', function () {
+        const query = this.value.trim();
+
+        fetch(`/notes/search?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(notes => {
+                // Clear dulu
+                mainNotesContainer.innerHTML = '';
+                pinNotesContainer.innerHTML = '';
+
+                if (notes.length === 0) {
+                    mainNotesContainer.innerHTML = '<p class="text-gray-500 font-semibold">No notes found.</p>';
+                    return;
+                }
+
+                notes.forEach(note => {
+                    const noteDiv = document.createElement('div');
+                    noteDiv.className = 'noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400';
+                    noteDiv.setAttribute('data-id', note.id);
+                    noteDiv.setAttribute('data-pinned', note.is_pinned ? 'true' : 'false');
+
+                    noteDiv.innerHTML = `
+                        <h2 class="font-semibold">${note.title.substring(0, 15)}</h2>
+                        <p class="text-sm mt-3 break-all">${note.content.substring(0, 170)}</p>
+                        <!-- Tambahkan tombol edit/delete/archive jika ingin -->
+                    `;
+
+                    if (note.is_pinned) {
+                        pinNotesContainer.appendChild(noteDiv);
+                    } else {
+                        mainNotesContainer.appendChild(noteDiv);
+                    }
+                });
+            });
     });
 });
 

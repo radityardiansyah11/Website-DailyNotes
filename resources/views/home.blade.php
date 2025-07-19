@@ -60,12 +60,12 @@
                 <!-- Title & Input -->
                 <div class="flex sm:flex-row flex-1 items-start sm:items-center gap-4">
                     <h1 class="text-md sm:text-2xl font-semibold">My Notes</h1>
-                    <input type="text"
+                    <input type="text" id="searchInput"
                         class="w-full sm:w-48 md:w-64 lg:w-96 lg:h-10 bg-gray-100 rounded-3xl px-4 py-2 placeholder-gray-500 text-sm focus:outline-none"
                         placeholder="Search">
                 </div>
 
-                <!-- Actions -->
+                <!-- Actions -->    
                 <div class="flex items-center gap-4">
                     <!-- button add -->
                     <button type="button" data-modal-target="modalAddNote" data-modal-toggle="modalAddNote"

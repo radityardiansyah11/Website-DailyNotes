@@ -49,6 +49,9 @@ Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update
 /* pin unpin note */
 Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin');
 
+/* Search */
+Route::get('/notes/search', [NoteController::class, 'search'])->name('notes.search');
+
 /* page */
 Route::get('/login', function () {
     return view('login');
