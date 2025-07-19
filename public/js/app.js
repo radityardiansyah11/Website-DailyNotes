@@ -42,16 +42,31 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             updatePinVisibility();
+
+            // Kirim ke server
+            const noteId = note.getAttribute("data-id");
+            fetch(`/notes/${noteId}/toggle-pin`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert("Gagal mem-pin note.");
+                    } else {
+                        // Optional: refresh jika kamu ingin update penuh
+                        // location.reload();
+                    }
+                })
+                .catch(err => {
+                    console.error("Error:", err);
+                    alert("Gagal terhubung ke server.");
+                });
         }
     });
-
-    if (isPinned) {
-        mainNotesContainer.appendChild(note);
-        note.setAttribute("data-pinned", "false");
-    } else {
-        pinNotesContainer.appendChild(note);
-        note.setAttribute("data-pinned", "true");
-    }
 
     // simpan ke DB (opsional)
     const noteId = note.getAttribute("data-id");
@@ -147,29 +162,59 @@ document.addEventListener("DOMContentLoaded", () => {
     const modal = document.getElementById('modalViewNote');
     const titleInput = document.getElementById('textAreaNoteHead');
     const contentInput = document.getElementById('textAreaNoteContent');
+    
+    // Tambahkan global variable
+    let currentNoteId = null;
 
     editButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const title = btn.getAttribute('data-title');
             const content = btn.getAttribute('data-content');
+            const id = btn.getAttribute('data-id'); // ambil id dari tombol
 
             titleInput.value = title;
             contentInput.value = content;
+            currentNoteId = id;
 
             modal.classList.remove('hidden');
 
-            // Tunggu render modal baru atur ulang tinggi textarea
+            // Auto resize textarea
             setTimeout(() => {
                 titleInput.style.height = 'auto';
                 titleInput.style.height = titleInput.scrollHeight + 'px';
 
                 contentInput.style.height = 'auto';
                 contentInput.style.height = contentInput.scrollHeight + 'px';
-            }, 10); // atau 50ms kalau masih kurang
+            }, 10);
         });
     });
 
+    // Tombol Save
+    document.getElementById('saveNoteBtn').addEventListener('click', () => {
+        const title = titleInput.value;
+        const content = contentInput.value;
+
+        if (!currentNoteId) return;
+
+        fetch(`/notes/${currentNoteId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ title, content })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                location.reload();
+            } else {
+                alert("Gagal update note.");
+            }
+        });
+    });
 });
+
 
 /* delete button */
 let noteIdToDelete = null;

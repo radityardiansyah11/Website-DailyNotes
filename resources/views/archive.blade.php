@@ -153,6 +153,7 @@
                             sore</p>
                         <div
                             class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
+                            
                             <button type="button" data-tooltip-placement="bottom" data-tooltip-target="trash-no-arrow"
                                 class="text-gray-400 hover:text-gray-500">
                                 <i class="fa fa-archive"></i>

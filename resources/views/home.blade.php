@@ -182,14 +182,69 @@
                 <a class="text-xs text-gray-400 mb-3 font-semibold" id="addPinNotes">PIN NOTES</a>
                 <div id="pinNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
-                    <!-- isi note yg dipin secara dinamis -->
+                    @foreach ($pinnedNotes as $note)
+                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
+                            data-id="{{ $note->id }}" data-pinned="true">
+                            <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>
+                            <p class="text-sm mt-3 break-all">{{ Str::limit($note->content, 170) }}</p>
+
+                            <div
+                                class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
+                                <!-- Pin -->
+                                <button class="pin-btn text-gray-400 hover:text-gray-500"
+                                    data-id="{{ $note->id }}" data-tooltip-target="pin-no-arrow"
+                                    data-tooltip-placement="bottom">
+                                    <i class="fas fa-thumbtack"></i>
+                                    <div id="pin-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                        Pin
+                                    </div>
+                                </button>
+
+                                <!-- Archive -->
+                                <button type="button" class="text-gray-400 hover:text-gray-500"
+                                    data-tooltip-target="archive-no-arrow" data-tooltip-placement="bottom">
+                                    <i class="fas fa-archive"></i>
+                                    <div id="archive-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                        Archive
+                                    </div>
+                                </button>
+
+                                <!-- Edit -->
+                                <button type="button" class="text-gray-400 hover:text-gray-500 edit-btn"
+                                    data-id="{{ $note->id }}" data-title="{{ $note->title }}"
+                                    data-content="{{ $note->content }}" data-modal-target="modalViewNote"
+                                    data-modal-toggle="modalViewNote" data-tooltip-target="edit-no-arrow"
+                                    data-tooltip-placement="bottom">
+                                    <i class="fa fa-edit"></i>
+                                    <div id="edit-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                        Edit
+                                    </div>
+                                </button>
+
+                                <!-- Delete -->
+                                <button type="button" class="text-gray-400 hover:text-gray-500 open-delete-modal"
+                                    data-id="{{ $note->id }}" data-modal-target="modalDeleteNote"
+                                    data-modal-toggle="modalDeleteNote" data-tooltip-target="trash-no-arrow"
+                                    data-tooltip-placement="bottom">
+                                    <i class="fa fa-trash"></i>
+                                    <div id="trash-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600">
+                                        Delete
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
 
                 <!-- OTHER NOTES -->
                 <a class="text-xs text-gray-400 mb-3 font-semibold">OTHER NOTES</a>
                 <div id="mainNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
-                    @foreach ($notes as $note)
+                    @foreach ($otherNotes as $note)
                         <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
                             data-id="{{ $note->id }}" data-pinned="{{ $note->pinned ? 'true' : 'false' }}">
 
@@ -200,28 +255,48 @@
                                 class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
                                 <!-- Pin -->
                                 <button class="pin-btn text-gray-400 hover:text-gray-500"
-                                    data-id="{{ $note->id }}">
+                                    data-id="{{ $note->id }}" data-tooltip-target="pin-no-arrow"
+                                    data-tooltip-placement="bottom">
                                     <i class="fas fa-thumbtack"></i>
+                                    <div id="pin-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                        Pin
+                                    </div>
                                 </button>
 
                                 <!-- Archive -->
-                                <button type="button" class="text-gray-400 hover:text-gray-500">
+                                <button type="button" class="text-gray-400 hover:text-gray-500"
+                                    data-tooltip-target="archive-no-arrow" data-tooltip-placement="bottom">
                                     <i class="fas fa-archive"></i>
+                                    <div id="archive-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                        Archive
+                                    </div>
                                 </button>
 
                                 <!-- Edit -->
                                 <button type="button" class="text-gray-400 hover:text-gray-500 edit-btn"
                                     data-id="{{ $note->id }}" data-title="{{ $note->title }}"
                                     data-content="{{ $note->content }}" data-modal-target="modalViewNote"
-                                    data-modal-toggle="modalViewNote">
+                                    data-modal-toggle="modalViewNote" data-tooltip-target="edit-no-arrow"
+                                    data-tooltip-placement="bottom">
                                     <i class="fa fa-edit"></i>
+                                    <div id="edit-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                                        Edit
+                                    </div>
                                 </button>
 
                                 <!-- Delete -->
                                 <button type="button" class="text-gray-400 hover:text-gray-500 open-delete-modal"
                                     data-id="{{ $note->id }}" data-modal-target="modalDeleteNote"
-                                    data-modal-toggle="modalDeleteNote">
+                                    data-modal-toggle="modalDeleteNote" data-tooltip-target="trash-no-arrow"
+                                    data-tooltip-placement="bottom">
                                     <i class="fa fa-trash"></i>
+                                    <div id="trash-no-arrow" role="tooltip"
+                                        class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600">
+                                        Delete
+                                    </div>
                                 </button>
                             </div>
                         </div>

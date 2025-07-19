@@ -17,8 +17,9 @@ class NoteController extends Controller
 
         Note::create([
             'user_id' => Auth::id(),
-            'title' => $request->title,
-            'content' => $request->content,
+            'title' => $request->input('title'),
+            'content' => $request->input('content'),
+
         ]);
 
         return redirect()->route('home')->with('success', 'Catatan berhasil di tambahkan!');
@@ -33,6 +34,31 @@ class NoteController extends Controller
         }
 
         $note->delete();
+
+        return response()->json(['success' => true]);
+    }
+
+    public function togglePin($id)
+    {
+        $note = Note::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+        $note->is_pinned = !$note->is_pinned;
+        $note->save();
+
+        return response()->json(['success' => true, 'is_pinned' => $note->is_pinned]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+        ]);
+
+        $note = Note::where('id', $id)->where('user_id', auth()->id())->firstOrFail();
+
+        $note->title = $request->input('title');
+        $note->content = $request->input('content');
+        $note->save();
 
         return response()->json(['success' => true]);
     }

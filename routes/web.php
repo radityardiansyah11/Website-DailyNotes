@@ -35,13 +35,19 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
 
 /* pin */
-Route::post('/notes/{id}/pin', [NoteController::class, 'togglePin']);
+Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin']);
 
 /* home */
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
 
 /* delete note */
 Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
+
+/* edit note */
+Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update');
+
+/* pin unpin note */
+Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin');
 
 /* page */
 Route::get('/login', function () {
