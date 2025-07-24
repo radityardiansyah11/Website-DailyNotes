@@ -74,7 +74,7 @@
 
                     <!-- modal add note -->
                     <div id="modalAddNote" tabindex="-1" aria-hidden="true"
-                        class="hidden overflow-y-auto  fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+                        class="hidden overflow-y-auto  fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full ">
 
                         <div class="relative p-4 w-full max-w-xl">
 
@@ -308,7 +308,7 @@
                     class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
                     <div class="relative p-4 w-full max-w-xl">
                         <div
-                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto">
+                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto no-scrollbar">
                             <!-- Body -->
                             <div class="p-3 md:p-4 overflow-y-auto max-h-screen">
                                 <textarea id="textAreaNoteHead" rows="1" placeholder="Title"
@@ -318,7 +318,7 @@
                             </div>
                             <div
                                 class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                <p class="flex text-xs text-white md:mt-1">last update 25 Jan</p>
+                                <p class="flex text-xs text-white md:mt-1">Updated at {{ Str::Limit($note->updated_at->translatedFormat('d F Y') ) }}</p>
                                 <button id="saveNoteBtn" type="button"
                                     class="flex font-semibold text-white">Save</button>
                             </div>

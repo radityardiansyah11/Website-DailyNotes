@@ -283,10 +283,31 @@ document.addEventListener('DOMContentLoaded', () => {
                     noteDiv.setAttribute('data-pinned', note.is_pinned ? 'true' : 'false');
 
                     noteDiv.innerHTML = `
-                        <h2 class="font-semibold">${note.title.substring(0, 15)}</h2>
-                        <p class="text-sm mt-3 break-all">${note.content.substring(0, 170)}</p>
-                        <!-- Tambahkan tombol edit/delete/archive jika ingin -->
-                    `;
+    <h2 class="font-semibold">${note.title.substring(0, 15)}</h2>
+    <p class="text-sm mt-3 break-all">${note.content.substring(0, 170)}</p>
+
+    <div class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
+        <button class="pin-btn text-gray-400 hover:text-gray-500" data-id="${note.id}">
+            <i class="fas fa-thumbtack"></i>
+        </button>
+
+        <button class="text-gray-400 hover:text-gray-500">
+            <i class="fas fa-archive"></i>
+        </button>
+
+        <button type="button" class="text-gray-400 hover:text-gray-500 edit-btn"
+            data-id="${note.id}" data-title="${note.title}" data-content="${note.content}"
+            data-modal-target="modalViewNote" data-modal-toggle="modalViewNote">
+            <i class="fa fa-edit"></i>
+        </button>
+
+        <button type="button" class="text-gray-400 hover:text-gray-500 open-delete-modal"
+            data-id="${note.id}" data-modal-target="modalDeleteNote" data-modal-toggle="modalDeleteNote">
+            <i class="fa fa-trash"></i>
+        </button>
+    </div>
+`;
+
 
                     if (note.is_pinned) {
                         pinNotesContainer.appendChild(noteDiv);

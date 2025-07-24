@@ -34,7 +34,7 @@
                 <input type="password" placeholder="Password" name="password"
                     class="flex w-full max-w-xs h-10 bg-white rounded-lg p-3 text-gray-900 focus:outline-none">
             </div>
-            <a class="flex justify-start text-xs mt-1 ms-1">Forgot Password?</a>
+            <a class="flex justify-start text-xs mt-1 ms-1 hover:text-gray-200" href="">Forgot Password?</a>
             <button type="submit"
                 class="flex w-full h-10 bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-600 hover:to-orange-700 justify-center items-center rounded-lg font-semibold mt-4">
                 Sign In
