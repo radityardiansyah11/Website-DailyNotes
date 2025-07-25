@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;//loginController   
 use App\Http\Controllers\NoteController; //noteController
 use App\Http\Controllers\HomeController;//homeController
+use App\Http\Controllers\DashboardController;//dashboard
 
 /* Login System  */
 Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('guest')->name('login');
@@ -50,7 +51,11 @@ Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update
 Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin');
 
 /* Search */
-Route::get('/notes/search', [NoteController::class, 'search'])->name('notes.search');
+Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');
+
+
+/* Dashboard */
+Route::get('/dashboardUser', [DashboardController::class, 'index'])->name('dashboardUser');
 
 /* page */
 Route::get('/login', function () {
@@ -81,6 +86,3 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::get('/dashboardUser', function () {
-    return view('dashboardUser');
-})->name('dashboardUser');

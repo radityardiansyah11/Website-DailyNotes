@@ -319,6 +319,64 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('userSearchInput');
+    const resultBox = document.getElementById('userSearchResults');
+
+    input.addEventListener('input', () => {
+        const query = input.value.trim();
+
+        if (query.length === 0) {
+            resultBox.innerHTML = '';
+            return;
+        }
+
+        fetch(`/dashboard/users/search?query=${encodeURIComponent(query)}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.length === 0) {
+                    resultBox.innerHTML = '<p class="flex text-sm text-gray-500 font-semibold mt-4 justify-center">User not found.</p>';
+                } else {
+                    resultBox.innerHTML = data.map(user => `
+                        <div class="flex items-center w-3/5 gap-3">
+                    <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
+                    <button id="profileButton" type="button" class="flex rounded-full focus:outline-none">
+                        <img alt="profile" class="rounded-full w-9 h-9 object-cover"
+                            src="https://storage.googleapis.com/a1aa/image/778a18a0-4a4f-46b0-57e0-c4f3909279ce.jpg" />
+                    </button>
+                    <a class="flex text-sm text-gray-500 font-semibold">${user.name}</a>
+                </div>
+                <div class="w-2/5 flex items-center gap-2">
+                    <a class="text-xs text-sky-700 font-semibold border border-sky-300 p-1 rounded-full">Admin</a>
+                    <a class="text-xs text-green-700 font-semibold border border-green-300 p-1 rounded-full">Import
+                        Data</a>
+                    <a class="text-xs text-purple-700 font-semibold border border-purple-300 p-1 rounded-full">Export
+                        Data</a>
+                </div>
+                <div class="w-1/3">
+                    <a class="flex text-sm text-gray-500 font-semibold ms-2">${note.password.substring(0, 20)}</a>
+                </div>
+                <div class="w-1/4">
+                    <a class="flex text-sm text-gray-500 font-semibold ms-3">Jan 4, 2025 </a>
+                </div>
+                <div class="w-1/4">
+                    <a class="flex text-sm text-gray-500 font-semibold ms-4">${user.created_at}</a>
+                </div>
+                <div class="flex">
+                    <button type="button" class="flex" id="dropdownDelayButton"
+                        data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover">
+                        <i class="fa fa-ellipsis-v text-md me-2 text-gray-500"></i>
+                    </button>
+                </div>
+                    `).join('');
+                }
+            });
+    });
+});
+
+
+
+
 
 
 

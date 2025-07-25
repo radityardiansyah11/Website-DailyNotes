@@ -80,7 +80,6 @@ class NoteController extends Controller
 
         return response()->json($results);
     }
-    
 
 }
 

@@ -65,7 +65,7 @@
                         placeholder="Search">
                 </div>
 
-                <!-- Actions -->    
+                <!-- Actions -->
                 <div class="flex items-center gap-4">
                     <!-- button add -->
                     <button type="button" data-modal-target="modalAddNote" data-modal-toggle="modalAddNote"
@@ -308,9 +308,9 @@
                     class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
                     <div class="relative p-4 w-full max-w-xl">
                         <div
-                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto no-scrollbar">
+                            class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto ">
                             <!-- Body -->
-                            <div class="p-3 md:p-4 overflow-y-auto max-h-screen">
+                            <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
                                 <textarea id="textAreaNoteHead" rows="1" placeholder="Title"
                                     class="w-full  p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
                                 <textarea id="textAreaNoteContent" placeholder="Text"
@@ -318,7 +318,8 @@
                             </div>
                             <div
                                 class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                <p class="flex text-xs text-white md:mt-1">Updated at {{ Str::Limit($note->updated_at->translatedFormat('d F Y') ) }}</p>
+                                <p class="flex text-xs text-white md:mt-1">Updated at
+                                    {{ Str::Limit($note->updated_at->translatedFormat('d F Y')) }}</p>
                                 <button id="saveNoteBtn" type="button"
                                     class="flex font-semibold text-white">Save</button>
                             </div>

@@ -32,10 +32,10 @@
                 <a class="text-xs font-semibold text-gray-500">GENERAL</a>
                 <nav class="flex flex-col mt-3 justify-between">
                     <div class="flex flex-col">
-                        <a class="flex text-sm font-semibold gap-2 items-center text-gray-800 bg-gray-300 rounded-md w-56 h-full p-2" href=""><i
-                                class="far fa-list-alt text-md"></i>Dashboard</a>
-                        <a class="flex text-sm font-semibold text-gray-600 gap-2 items-center hover:bg-gray-200 rounded-md w-56 h-full p-2" href=""><i
-                                class="far fa-user text-md"></i>User Management</a>
+                        <a class="flex text-sm font-semibold gap-2 items-center text-gray-700 bg-gray-200 rounded-md w-56 h-full p-2"
+                            href="{{ route('dashboard') }}"><i class="far fa-list-alt text-md"></i>Dashboard</a>
+                        <a class="flex text-sm font-semibold text-gray-500 gap-2 items-center hover:bg-gray-200 rounded-md w-56 h-full p-2"
+                            href="{{ route('dashboardUser') }}"><i class="far fa-user text-md"></i>User Management</a>
                     </div>
                 </nav>
             </div>
