@@ -318,8 +318,8 @@
                             </div>
                             <div
                                 class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                <p class="flex text-xs text-white md:mt-1">Updated at
-                                    {{ Str::Limit($note->updated_at->translatedFormat('d F Y')) }}</p>
+                                <p class="flex text-xs text-white md:mt-1">Updated at 
+                                    {{-- {{$note->updated_at}}</p> --}}
                                 <button id="saveNoteBtn" type="button"
                                     class="flex font-semibold text-white">Save</button>
                             </div>

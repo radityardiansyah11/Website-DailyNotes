@@ -401,18 +401,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
     editButtons.forEach(button => {
         button.addEventListener("click", function () {
-            const userId = this.dataset.id;
-            const userName = this.dataset.user;
-            const userEmail = this.dataset.email;
-            const userPassword = this.dataset.password;
+            const userId = this.getAttribute("data-id");
+            const userName = this.getAttribute("data-user");
+            const userEmail = this.getAttribute("data-email");
+            const userPassword = this.getAttribute("data-password");
 
             // Isi input modal edit
-            // document.getElementById("editUsreId").value = userId
+            document.getElementById("editUserId").value = userId;
             document.getElementById("editUserName").value = userName;
             document.getElementById("editUserEmail").value = userEmail;
             document.getElementById("editUserPassword").value = userPassword;
 
-            // document.getElementById ("formEditUser").action  = `/user/${userId}`
+            document.getElementById("formEditUser").action  = `/user/${userId}`
         });
     });
 });

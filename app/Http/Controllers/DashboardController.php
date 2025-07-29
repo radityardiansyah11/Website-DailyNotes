@@ -54,19 +54,23 @@ class DashboardController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            "name" => "required|string",
-            "email" => "required|string",
-            "password" => "required|string|min:8",
+            "name" => "required|string|max:255",
+            "email" => "required|email",
+            "password" => "nullable|string|min:8",
         ]);
 
         $user = User::findOrFail($id);
 
         $user->name = $request->input('name');
         $user->email = $request->input('email');
-        $user->password = bcrypt($request->input('password'));
+
+         if ($request->password) {
+        $user->password = bcrypt($request->password); // Enkripsi password
+    }
+
         $user->save();
 
-        return response()->json( ['success'=> true] );
+        return redirect()->back()->with('success', 'User updated successfully.');
     }
 
 }
