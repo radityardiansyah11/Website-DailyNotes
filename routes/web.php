@@ -56,6 +56,8 @@ Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->n
 
 /* Dashboard */
 Route::get('/dashboardUser', [DashboardController::class, 'index'])->name('dashboardUser');
+Route::post('/user', [DashboardController::class, 'store'])->name('user.store');
+Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.update');
 
 /* page */
 Route::get('/login', function () {

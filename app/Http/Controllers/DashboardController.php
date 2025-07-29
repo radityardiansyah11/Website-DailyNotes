@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User; // ← Pastikan huruf U besar sesuai model
+use App\Models\User;
 
 class DashboardController extends Controller
 {
@@ -18,7 +18,26 @@ class DashboardController extends Controller
             })
             ->get();
 
-        return view("dashboardUser", compact("users", "search"));
+        $userCount = User::count();
+
+        return view("dashboardUser", compact("users", "search", "userCount"));
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            "name" => "required|string",
+            "email" => "required|email|unique:users,email",
+            "password" => "required|string|min:8",
+        ]);
+
+        User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => bcrypt($request->input('password')),
+        ]);
+
+        return redirect()->route('dashboardUser')->with('success', 'User berhasil ditambahkan');
     }
 
     public function search(Request $request)
@@ -30,6 +49,24 @@ class DashboardController extends Controller
             ->get();
 
         return response()->json($users);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            "name" => "required|string",
+            "email" => "required|string",
+            "password" => "required|string|min:8",
+        ]);
+
+        $user = User::findOrFail($id);
+
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = bcrypt($request->input('password'));
+        $user->save();
+
+        return response()->json( ['success'=> true] );
     }
 
 }

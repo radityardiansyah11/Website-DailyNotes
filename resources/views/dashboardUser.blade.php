@@ -55,16 +55,15 @@
         <div class="flex gap-2 justify-between items-center mb-7">
             <div class="flex gap-2">
                 <a class="text-xl font-semibold">All User</a>
-                <a class="text-xl font-semibold text-gray-500">90</a>
+                <a class="text-xl font-semibold text-gray-500">{{ $userCount }}</a>
             </div>
 
             <div class="flex gap-2">
                 <input type="text" placeholder="Search" id="userSearchInput"
-                    class="w-full min-w-48 md:min-w-64 h-full md:p-2 rounded-xl border border-gray-300 placeholder:font-semibold placeholder:px-1">
-                <button type="button"
-                    class="w-full min-w-24 md:min-w-32 h-full md:p-2 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold"
-                    data-modal-target="modalAddUser" data-modal-toggle="modalAddUser"><i
-                        class="fa fa-plus text-md me-2 text-normal"></i>Add
+                    class="w-full min-w-48 md:min-w-64 h-full md:p-2 rounded-xl border border-gray-300 placeholder:font-semibold placeholder:px-1 focus:outline-none">
+                <button type="button" data-modal-target="modalAddUser" data-modal-toggle="modalAddUser"
+                    class="w-full min-w-24 md:min-w-32 h-full md:p-2 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold"><i
+                        class="fa fa-plus text-md me-2 text-normal" href="#"></i>Add
                     User</button>
             </div>
         </div>
@@ -75,64 +74,70 @@
 
             <div class="relative w-full max-w-lg max-h-full p-4">
 
-                <div class="relative bg-white rounded-2xl shadow-sm flex flex-col">
-                    <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">ADD USER</a>
-                    <!-- main modal add user-->
-                    <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
-                        <div class="flex flex-col w-full">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User Name</label>
-                            <input type="text" placeholder="Username"
-                                class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label for="pass" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" placeholder="Password"
-                                class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
-                            <input type="text" placeholder="Email"
-                                class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                        </div>
-                        <div class="flex flex-col w-full gap-1">
-                            <label for="acces" class="block mb-2 text-sm font-medium text-gray-700">Acces</label>
-                            <div class="flex gap-5">
+                <form method="POST" action="{{ route('user.store') }}">
+                    @csrf
+                    <div class="relative bg-white rounded-2xl shadow-sm flex flex-col">
+                        <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">ADD USER</a>
+                        <!-- main modal add user-->
+                        <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
+                            <div class="flex flex-col w-full">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
+                                    Name</label>
+                                <input type="text" placeholder="Username" id="addName" name="name"
+                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                            </div>
+                            <div class="flex flex-col w-full">
+                                <label for="pass"
+                                    class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+                                <input type="password" placeholder="Password" id="addPassword" name="password"
+                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                            </div>
+                            <div class="flex flex-col w-full">
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+                                <input type="text" placeholder="Email" id="addEmail" name="email"
+                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                            </div>
+                            <div class="flex flex-col w-full gap-1">
+                                <label for="acces" class="block mb-2 text-sm font-medium text-gray-700">Acces</label>
+                                <div class="flex gap-5">
 
-                                <div class="flex items-center">
-                                    <input id="accesCheckbox" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                    <label for="accesCheckbox"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="accesCheckbox" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                    <label for="accesCheckbox"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Export
-                                        Data</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="accesCheckbox" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                    <label for="accesCheckbox"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Import
-                                        Data</label>
+                                    <div class="flex items-center">
+                                        <input id="accesCheckbox" type="checkbox" value=""
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                                        <label for="accesCheckbox"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="accesCheckbox" type="checkbox" value=""
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                                        <label for="accesCheckbox"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Export
+                                            Data</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="accesCheckbox" type="checkbox" value=""
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                                        <label for="accesCheckbox"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Import
+                                            Data</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div
+                            class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-xl h-14 items-center p-4">
+                            <button type="submit" class="flex p-2 rounded-lg font-semibold text-white">Add
+                                User</button>
+                        </div>
                     </div>
-                    <div
-                        class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-xl h-14 items-center p-4">
-                        <button type="button" class="flex p-2 rounded-lg font-semibold text-white">Add User</button>
-                    </div>
-                </div>
+                </form>
 
             </div>
         </div>
 
         <!-- user data -->
         <div class="flex h-full max-h-11 gap-2 bg-gray-100 p-2 px-4 rounded-xl items-center">
-            <div class="flex gap-3 items-center w-3/5">
+            <div class="flex gap-3 items-center w-2/5">
                 <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
                 <a class="flex text-sm text-gray-500 font-semibold">User name</a>
             </div>
@@ -140,12 +145,15 @@
                 <a class="flex text-sm text-gray-500 font-semibold">Acces</a>
             </div>
             <div class="w-1/3">
+                <a class="flex text-sm text-gray-500 font-semibold">Email</a>
+            </div>
+            <div class="w-1/3">
                 <a class="flex text-sm text-gray-500 font-semibold">Password</a>
             </div>
-            <div class="w-1/4">
+            <div class="w-1/5">
                 <a class="flex text-sm text-gray-500 font-semibold">Last Active</a>
             </div>
-            <div class="w-1/4">
+            <div class="w-1/5">
                 <a class="flex text-sm text-gray-500 font-semibold">Data Added</a>
             </div>
         </div>
@@ -154,13 +162,13 @@
             @foreach ($users as $user)
                 <div class="flex items-center p-2 px-4 py-4 border-b">
 
-                    <div class="flex items-center w-3/5 gap-3">
+                    <div class="flex items-center w-2/5 gap-3">
                         <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
                         <button id="profileButton" type="button" class="flex rounded-full focus:outline-none">
                             <img alt="profile" class="rounded-full w-9 h-9 object-cover"
                                 src="https://storage.googleapis.com/a1aa/image/778a18a0-4a4f-46b0-57e0-c4f3909279ce.jpg" />
                         </button>
-                        <a class="flex text-sm text-gray-500 font-semibold">{{ $user->name }}</a>
+                        <a class="flex text-sm text-gray-500 font-semibold">{{ Str::limit($user->name, 15) }}</a>
                     </div>
                     <div class="w-2/5 flex items-center gap-2">
                         <a class="text-xs text-sky-700 font-semibold border border-sky-300 p-1 rounded-full">Admin</a>
@@ -170,43 +178,53 @@
                             Data</a>
                     </div>
                     <div class="w-1/3">
+                        <a class="flex text-sm text-gray-500 font-semibold ms-3">{{ Str::limit($user->email, 20) }}</a>
+                    </div>
+                    <div class="w-1/3">
                         <a
                             class="flex text-sm text-gray-500 font-semibold ms-2">{{ Str::limit($user->password, 20) }}</a>
                     </div>
-                    <div class="w-1/4">
+                    <div class="w-1/5">
                         <a class="flex text-sm text-gray-500 font-semibold ms-3">Jan 4, 2025 </a>
                     </div>
-                    <div class="w-1/4">
-                        <a class="flex text-sm text-gray-500 font-semibold ms-4">{{ $user->created_at }}</a>
+                    <div class="w-1/5">
+                        <a
+                            class="flex text-sm text-gray-500 font-semibold ms-4">{{ Str::Limit($user->updated_at->translatedFormat('d F Y')) }}</a>
                     </div>
                     <div class="flex">
-                        <button type="button" class="flex" id="dropdownDelayButton"
-                            data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500"
-                            data-dropdown-trigger="hover">
+                        <button type="button" class="flex" id="dropdownDelayButton{{ $user->id }}"
+                            data-dropdown-toggle="dropdownDelay{{ $user->id }}" data-dropdown-delay="500">
                             <i class="fa fa-ellipsis-v text-md me-2 text-gray-500"></i>
                         </button>
                     </div>
                 </div>
-            @endforeach
-        </div>  
 
-        <!-- Dropdown menu -->
-        <div id="dropdownDelay" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-md w-32">
-            <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDelayButton">
-                <li>
-                    <button type="button" data-modal-target="modalDetailUser" data-modal-toggle="modalDetailUser"
-                        class="block px-4 py-2 hover:bg-gray-100">Detail User</button>
-                </li>
-                <li>
-                    <button type="button" data-modal-target="modalEditUser" data-modal-toggle="modalEditUser"
-                        class="block px-4 py-2 hover:bg-gray-100">Edit User</button>
-                </li>
-                <li>
-                    <button type="button" data-modal-target="modalDeleteUser" data-modal-toggle="modalDeleteUser"
-                        class="block px-4 py-2 hover:bg-gray-100">Delete Account</button>
-                </li>
-            </ul>
+                <!-- Dropdown menu -->
+                <div id="dropdownDelay{{ $user->id }}"
+                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-md w-32">
+                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDelayButton{{ $user->id }}">
+                        <li>
+                            <button type="button" data-modal-target="modalDetailUser"
+                                data-modal-toggle="modalDetailUser" class="block px-4 py-2 hover:bg-gray-100">Detail
+                                User</button>
+                        </li>
+                        <li>
+                            <button type="button" data-modal-target="modalEditUser"
+                                data-modal-toggle="modalEditUser" data-id="{{ $user->id }}"
+                                data-user="{{ $user->name }}" data-password="{{ $user->password }}"
+                                data-email="{{ $user->email }}"
+                                class="block px-4 py-2 hover:bg-gray-100 edit-user">Edit User</button>
+                        </li>
+                        <li>
+                            <button type="button" data-modal-target="modalDeleteUser"
+                                data-modal-toggle="modalDeleteUser" class="block px-4 py-2 hover:bg-gray-100">Delete
+                                Account</button>
+                        </li>
+                    </ul>
+                </div>
+            @endforeach
         </div>
+
 
         <!-- modal Detail USER -->
         <div id="modalDetailUser" tabindex="-1" aria-hidden="true"
@@ -221,18 +239,18 @@
                         <div class="flex flex-col w-full">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
                                 Name</label>
-                            <input type="text" placeholder="Username"
+                            <input type="text" placeholder="Username" id="addName"
                                 class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
                         </div>
                         <div class="flex flex-col w-full">
                             <label for="pass"
                                 class="block mb-2 text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" placeholder="Password"
+                            <input type="password" placeholder="Password" id="addPassword"
                                 class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
                         </div>
                         <div class="flex flex-col w-full">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
-                            <input type="text" placeholder="Email"
+                            <input type="text" placeholder="Email" id="addEmail"
                                 class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
                         </div>
                         <div class="flex flex-col w-full gap-1">
@@ -279,21 +297,23 @@
                     <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">EDIT USER</a>
                     <!-- main modal add user-->
                     <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
+
+                        <input type="hidden" id="editUserId" name="id">
                         <div class="flex flex-col w-full">
                             <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
                                 Name</label>
-                            <input type="text" placeholder="Username"
+                            <input type="text" placeholder="Username" id="editUserName" name="name"
                                 class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
                         </div>
                         <div class="flex flex-col w-full">
                             <label for="pass"
                                 class="block mb-2 text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" placeholder="Password"
+                            <input type="password" placeholder="Password" id="editUserPassword" name="password"
                                 class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
                         </div>
                         <div class="flex flex-col w-full">
                             <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
-                            <input type="text" placeholder="Email"
+                            <input type="email" placeholder="Email" id="editUserEmail" name="email"
                                 class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
                         </div>
                         <div class="flex flex-col w-full gap-1">
@@ -324,7 +344,8 @@
                     </div>
                     <div
                         class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-xl h-14 items-center p-4">
-                        <button type="button" class="flex p-2 rounded-lg font-semibold text-white">Save</button>
+                        <button type="button" id="saveEditUser"
+                            class="flex p-2 rounded-lg font-semibold text-white">Save</button>
                     </div>
                 </div>
             </div>

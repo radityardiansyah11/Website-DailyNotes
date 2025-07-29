@@ -59,7 +59,7 @@ class NoteController extends Controller
         $note->title = $request->input('title');
         $note->content = $request->input('content');
         $note->save();
-
+        
         return response()->json(['success' => true]);
     }
 

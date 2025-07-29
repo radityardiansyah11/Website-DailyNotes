@@ -123,6 +123,23 @@ document.addEventListener("DOMContentLoaded", () => {
     textarea.dispatchEvent(new Event('input'))
 })
 
+document.addEventListener("DOMContentLoaded", () => {
+    const inputName = document.getElementById('addName')
+    const input = document.getElementById('addEmail')
+    const inputPassword = document.getElementById('addPassword')
+
+    inputName.addEventListener('input', function () {
+    })
+
+    inputEmail.addEventListener('input', function () {
+    })
+
+    inputPassword.addEventListener('input', function () {
+    })
+
+
+})
+
 /* auto height textarea VIEW NOTE */
 //head
 /* document.addEventListener("DOMContentLoaded", () => {
@@ -319,6 +336,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/* search user */
 document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById('userSearchInput');
     const resultBox = document.getElementById('userSearchResults');
@@ -338,13 +356,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     resultBox.innerHTML = '<p class="flex text-sm text-gray-500 font-semibold mt-4 justify-center">User not found.</p>';
                 } else {
                     resultBox.innerHTML = data.map(user => `
-                        <div class="flex items-center w-3/5 gap-3">
+                        <div class="flex items-center w-2/5 gap-3">
                     <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
                     <button id="profileButton" type="button" class="flex rounded-full focus:outline-none">
                         <img alt="profile" class="rounded-full w-9 h-9 object-cover"
                             src="https://storage.googleapis.com/a1aa/image/778a18a0-4a4f-46b0-57e0-c4f3909279ce.jpg" />
                     </button>
-                    <a class="flex text-sm text-gray-500 font-semibold">${user.name}</a>
+                    <a class="flex text-sm text-gray-500 font-semibold">${user.name.substring(0, 15)}</a>
                 </div>
                 <div class="w-2/5 flex items-center gap-2">
                     <a class="text-xs text-sky-700 font-semibold border border-sky-300 p-1 rounded-full">Admin</a>
@@ -354,12 +372,15 @@ document.addEventListener('DOMContentLoaded', () => {
                         Data</a>
                 </div>
                 <div class="w-1/3">
+                    <a class="flex text-sm text-gray-500 font-semibold ms-2">${note.email.substring(0, 20)}</a>
+                </div>
+                <div class="w-1/3">
                     <a class="flex text-sm text-gray-500 font-semibold ms-2">${note.password.substring(0, 20)}</a>
                 </div>
-                <div class="w-1/4">
+                <div class="w-1/5">
                     <a class="flex text-sm text-gray-500 font-semibold ms-3">Jan 4, 2025 </a>
                 </div>
-                <div class="w-1/4">
+                <div class="w-1/5">
                     <a class="flex text-sm text-gray-500 font-semibold ms-4">${user.created_at}</a>
                 </div>
                 <div class="flex">
@@ -374,8 +395,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+/* edit user */
+document.addEventListener("DOMContentLoaded", function () {
+    const editButtons = document.querySelectorAll(".edit-user");
 
+    editButtons.forEach(button => {
+        button.addEventListener("click", function () {
+            const userId = this.dataset.id;
+            const userName = this.dataset.user;
+            const userEmail = this.dataset.email;
+            const userPassword = this.dataset.password;
 
+            // Isi input modal edit
+            // document.getElementById("editUsreId").value = userId
+            document.getElementById("editUserName").value = userName;
+            document.getElementById("editUserEmail").value = userEmail;
+            document.getElementById("editUserPassword").value = userPassword;
+
+            // document.getElementById ("formEditUser").action  = `/user/${userId}`
+        });
+    });
+});
 
 
 
