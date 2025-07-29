@@ -412,12 +412,12 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("editUserEmail").value = userEmail;
             document.getElementById("editUserPassword").value = userPassword;
 
-            document.getElementById("formEditUser").action  = `/user/${userId}`
+            document.getElementById("formEditUser").action = `/user/${userId}`
         });
     });
 });
 
-/* delete user */
+/* name in modal delete user */
 document.addEventListener("DOMContentLoaded", function () {
     const deleteButtonUser = document.querySelectorAll('.deleteUserBtn')
 

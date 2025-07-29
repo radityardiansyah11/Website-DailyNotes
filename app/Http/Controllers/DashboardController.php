@@ -64,13 +64,21 @@ class DashboardController extends Controller
         $user->name = $request->input('name');
         $user->email = $request->input('email');
 
-         if ($request->password) {
-        $user->password = bcrypt($request->password); // Enkripsi password
-    }
+        if ($request->password) {
+            $user->password = bcrypt($request->password); // Enkripsi password
+        }
 
         $user->save();
 
         return redirect()->back()->with('success', 'User updated successfully.');
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return redirect()->back()->with('success','User Deleted Succes');
     }
 
 }

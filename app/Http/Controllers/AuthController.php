@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     // Proses Register
-    public function register(Request $request)
+    public function register(Request $request)  
     {
         \Log::info('Masuk ke method register');
         \Log::info($request->all());
