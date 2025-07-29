@@ -181,11 +181,11 @@
                         <a class="flex text-sm text-gray-500 font-semibold ms-3">{{ Str::limit($user->email, 20) }}</a>
                     </div>
                     <div class="w-1/3">
-                        <a
-                            class="flex text-sm text-gray-500 font-semibold ms-2">{{ Str::repeat('•', 20) }}</a>
+                        <a class="flex text-sm text-gray-500 font-semibold ms-2">{{ Str::repeat('•', 20) }}</a>
                     </div>
                     <div class="w-1/5">
-                        <a class="flex text-sm text-gray-500 font-semibold ms-3">{{ Str::Limit($user->created_at->translatedFormat('d F Y')) }}</a>
+                        <a
+                            class="flex text-sm text-gray-500 font-semibold ms-3">{{ Str::Limit($user->created_at->translatedFormat('d F Y')) }}</a>
                     </div>
                     <div class="w-1/5">
                         <a
@@ -207,12 +207,14 @@
                             <button type="button" data-modal-target="modalEditUser"
                                 data-modal-toggle="modalEditUser" data-id="{{ $user->id }}"
                                 data-user="{{ $user->name }}" data-password="{{ $user->password }}"
-                                data-email="{{ $user->email }}" 
+                                data-email="{{ $user->email }}"
                                 class="block px-4 py-2 hover:bg-gray-100 edit-user">Edit User</button>
                         </li>
                         <li>
                             <button type="button" data-modal-target="modalDeleteUser"
-                                data-modal-toggle="modalDeleteUser" class="block px-4 py-2 hover:bg-gray-100">Delete
+                                data-modal-toggle="modalDeleteUser"
+                                class="block px-4 py-2 hover:bg-gray-100 deleteUserBtn"
+                                data-username="{{ $user->name }}" data-userid="{{ $user->id }}">Delete
                                 Account</button>
                         </li>
                     </ul>
@@ -365,8 +367,10 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
-                            you sure you want to delete (nama user)?</h3>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
+                             Are you sure you want to delete <span id="deleteUserName" class="text-red-600 font-semibold">(nama user)</span> ?
+                        </h3>
+
                         <button data-modal-hide="trash-modal" type="button"
                             class="text-white bg-gradient-to-r from-red-600 to-orange-600 font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center">
                             Yes, I'm sure

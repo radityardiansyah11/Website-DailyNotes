@@ -417,6 +417,25 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 
+/* delete user */
+document.addEventListener("DOMContentLoaded", function () {
+    const deleteButtonUser = document.querySelectorAll('.deleteUserBtn')
+
+    deleteButtonUser.forEach(button => {
+        button.addEventListener('click', function () {
+            const userName = this.dataset.username;
+            const userId = this.dataset.userid;
+
+            document.getElementById('deleteUserName').textContent = userName;
+
+            const deleteForm = document.getElementById('deleteForm')
+            if (deleteForm) {
+                deleteForm.action = `/user/${userId}`
+            }
+        })
+    })
+})
+
 
 
 

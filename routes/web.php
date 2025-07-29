@@ -9,55 +9,39 @@ use App\Http\Controllers\DashboardController;//dashboard
 
 /* Login System  */
 Route::get('/login', [AuthController::class, 'showLoginForm'])->middleware('guest')->name('login');
-Route::post('/login', [AuthController::class, 'login'])->middleware('guest');
-
+Route::post('/login', [AuthController::class, 'login'])->middleware('guest'); //login
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->middleware('guest')->name('register');
-Route::post('/register', [AuthController::class, 'register'])->middleware('guest');
+Route::post('/register', [AuthController::class, 'register'])->middleware('guest'); //register
 
 Route::get('/home', function () {
     return view('home');
-})->middleware('auth');
+})->middleware('auth'); //setelah login register masuk ke halaman home
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
-
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth'); //logout
 Route::post('/logout', function () {
     Auth::logout();
     request()->session()->invalidate();
     request()->session()->regenerateToken();
     return redirect('/login');
-})->name('logout');
-// Hanya bisa diakses oleh tamu (belum login)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest');
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest');
+})->name('logout'); //logout
+// Hanya bisa diakses oleh guest (belum login)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest'); //log reg acces guest login
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest'); // log reg acces guest
 // Harus login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 /* Note */
-Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');
-
-/* pin */
-Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin']);
-
-/* home */
-Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');
-
-/* delete note */
-Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy');
-
-/* edit note */
-Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update');
-
-/* pin unpin note */
-Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin');
-
-/* Search */
-Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');
-
+Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');//add note
+Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home'); //home
+Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy'); //delete note
+Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update'); //edit note
+Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin'); //pin unpin note
+Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');//search note
 
 /* Dashboard */
-Route::get('/dashboardUser', [DashboardController::class, 'index'])->name('dashboardUser');
-Route::post('/user', [DashboardController::class, 'store'])->name('user.store');
-Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.update');
+Route::get('/dashboardUser', [DashboardController::class, 'index'])->name('dashboardUser'); //get user
+Route::post('/user', [DashboardController::class, 'store'])->name('user.store'); //add user
+Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.update'); //edit user
 
 /* page */
 Route::get('/login', function () {
