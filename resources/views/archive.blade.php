@@ -17,7 +17,7 @@
     <div class="w-full bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-2xl h-full">
 
         <!-- sidebar -->
-        <aside class="flex flex-col w-full md:w-60 bg-white shadow-md md:shadow-none h-full">
+        <aside class="flex flex-col w-full md:w-60 bg-white shadow-md md:shadow-none h-full border-r">
             <div class="p-4">
                 <div class="flex items-center gap-2 px-4 py-4">
                     <div
@@ -61,7 +61,7 @@
                     <h1 class="text-md sm:text-2xl font-semibold">Archive Notes</h1>
                     <input type="text" id="searchInput"
                         class="w-full sm:w-48 md:w-64 lg:w-96 lg:h-10 bg-gray-100 rounded-3xl px-4 py-2 placeholder-gray-500 text-sm focus:outline-none"
-                        placeholder="Search">   
+                        placeholder="Search">
                 </div>
 
                 <!-- Actions -->

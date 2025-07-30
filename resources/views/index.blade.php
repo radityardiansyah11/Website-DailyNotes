@@ -17,7 +17,7 @@
     <div class="w-full bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-2xl h-full">
 
         <!-- sidebar -->
-        <aside class="flex flex-col w-full md:w-60 bg-white shadow-md md:shadow-none h-full">
+        <aside class="flex flex-col w-full md:w-60 bg-white shadow-md md:shadow-none h-full border-r">
             <div class="p-4">
                 <div class="flex items-center gap-2 px-4 py-4">
                     <div
@@ -49,8 +49,6 @@
                     </a>
                 </nav>
             </div>
-
-
         </aside>
 
         <!-- main content -->

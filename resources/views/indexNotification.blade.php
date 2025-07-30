@@ -17,7 +17,7 @@
     <div class="w-full bg-white rounded-3xl flex flex-col md:flex-row overflow-hidden shadow-2xl h-full">
 
         <!-- sidebar -->
-        <aside class="flex flex-col w-full md:w-60 bg-white shadow-md md:shadow-none h-full">
+        <aside class="flex flex-col w-full md:w-60 bg-white shadow-md md:shadow-none h-full border-r">
             <div class="p-4">
                 <div class="flex items-center gap-2 px-4 py-4">
                     <div
@@ -37,11 +37,13 @@
                         <i class="far fa-list-alt text-md"></i>
                         Notes
                     </a>
-                    <a class="flex items-center gap-3 text-md sm:p-1 hover:text-gray-600" href="{{ route('indexArchive') }}">
+                    <a class="flex items-center gap-3 text-md sm:p-1 hover:text-gray-600"
+                        href="{{ route('indexArchive') }}">
                         <i class="fa fa-archive text-md"></i>
                         Archive
                     </a>
-                    <a class="flex items-center gap-3 text-md sm:p-1 text-gray-900" href="{{ route('indexNotification') }}">
+                    <a class="flex items-center gap-3 text-md sm:p-1 text-gray-900"
+                        href="{{ route('indexNotification') }}">
                         <i class="fas fa-bell text-md"></i>
                         Notification
                     </a>
