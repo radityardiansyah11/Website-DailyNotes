@@ -42,7 +42,8 @@
                         <i class="fa fa-archive text-md"></i>
                         Archive
                     </a>
-                    <a class="flex items-center gap-3 text-md sm:p-1 text-gray-400 hover:text-gray-600" href="{{ route('indexNotification') }}">
+                    <a class="flex items-center gap-3 text-md sm:p-1 text-gray-400 hover:text-gray-600"
+                        href="{{ route('indexNotification') }}">
                         <i class="fas fa-bell text-md"></i>
                         Notification
                     </a>
@@ -66,19 +67,18 @@
 
                 <!-- Actions -->
                 <div class="flex items-center gap-4">
-                    <a type="button" class="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white rounded-3xl px-5 py-2.5 text-sm font-medium"
+                    <a type="button"
+                        class="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white rounded-3xl px-5 py-2.5 text-sm font-medium"
                         href="{{ route('login') }}">Login</a>
                 </div>
             </section>
 
             <!-- content -->
-            <section class="flex flex-col">
-                <div class="flex h-screen justify-center text-gray-400">
-                    <a class="flex items-center font-semibold text-sm md:text-lg gap-3 ">
-                        login to use more DailyNotes features
-                        <i class="fa fa-smile-wink" aria-hidden="true"></i>
-                    </a>
-                </div>
+            <section class="flex justify-center items-center h-screen h-32">
+                <a class="flex items-center font-semibold text-sm md:text-lg gap-3 text-gray-400 gfap-2">
+                    login to use more DailyNotes features
+                    <i class="fa fa-smile-wink" aria-hidden="true"></i>
+                </a>
             </section>
         </main>
     </div>

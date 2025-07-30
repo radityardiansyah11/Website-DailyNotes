@@ -71,13 +71,11 @@
             </section>
 
             <!-- content -->
-            <section class="flex flex-col">
-                <div class="flex h-screen justify-center text-gray-400">
-                    <a class="flex items-center font-semibold text-sm md:text-lg gap-3 ">
-                        login to use more DailyNotes features
-                        <i class="fa fa-smile-wink" aria-hidden="true"></i>
-                    </a>
-                </div>
+            <section class="flex justify-center items-center h-screen h-32">
+                <a class="flex items-center font-semibold text-sm md:text-lg gap-3 text-gray-400 gfap-2">
+                    login to use more DailyNotes features
+                    <i class="fa fa-smile-wink" aria-hidden="true"></i>
+                </a>
             </section>
         </main>
     </div>

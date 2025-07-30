@@ -13,11 +13,10 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('guest'); //
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->middleware('guest')->name('register');
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest'); //register
 
-Route::get('/home', function () {
-    return view('home');
-})->middleware('auth'); //setelah login register masuk ke halaman home
-
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout'); //logout
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
+// Hanya bisa diakses oleh guest (belum login)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest'); //log reg acces guest login
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest'); // log reg acces guest
 // Harus login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
