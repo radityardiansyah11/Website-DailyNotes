@@ -73,3 +73,113 @@
         </div>
     </div>
 </div>
+
+<div id="mainNotes" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
+    @foreach ($archivedNotes as $note)
+    <div data-id="{{ $note->id }}"
+        class="relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400">
+        <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>
+        <p class="text-sm mt-3">{{ Str::limit($note->content, 170) }} </p>
+        <div
+            class="absolute bottom-2 right-4 opacity-0 translate-y-2 transition-all duration-300 ease-in-out group-hover:opacity-100 group-hover:translate-y-0 space-x-2">
+
+            <button type="button" data-tooltip-placement="bottom" data-tooltip-target="trash-no-arrow"
+                class="text-gray-400 hover:text-gray-500">
+                <i class="fa fa-archive"></i>
+            </button>
+
+            <button type="button" data-tooltip-target="edit-no-arrow" data-tooltip-placement="bottom"
+                data-modal-target="modalViewNote" data-modal-toggle="modalViewNote"
+                class="text-gray-400 hover:text-gray-500">
+                <i class="fa fa-edit"></i>
+                <div id="edit-no-arrow" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
+                    Edit
+                </div>
+            </button>
+
+            <button type="button" data-modal-target="modalDeleteNote" data-modal-toggle="modalDeleteNote"
+                data-tooltip-placement="bottom" data-tooltip-target="trash-no-arrow"
+                class="text-gray-400 hover:text-gray-500">
+                <i class="fa fa-trash"></i>
+                <div id="trash-no-arrow" role="tooltip"
+                    class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600">
+                    Delete Archive
+                </div>
+            </button>
+        </div>
+        @endforeach
+
+
+
+
+
+        <!-- MODAL NIH -->
+        <div id="modalAddUser" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+
+            <div class="relative w-full max-w-lg max-h-full p-4">
+
+                <form method="POST" action="{{ route('user.store') }}">
+                    @csrf
+                    
+                    <div class="relative bg-white rounded-2xl shadow-sm flex flex-col">
+
+                        <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">ADD USER</a>
+
+                        <!-- main modal add user-->
+                        <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
+
+                            <div class="flex flex-col w-full">
+                                <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
+                                    Name</label>
+                                <input type="text" placeholder="Username" id="addName" name="name"
+                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                            </div>
+                            <div class="flex flex-col w-full">
+                                <label for="pass" class="block mb-2 text-sm font-medium text-gray-700">Password</label>
+                                <input type="password" placeholder="Password" id="addPassword" name="password"
+                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                            </div>
+                            <div class="flex flex-col w-full">
+                                <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
+                                <input type="text" placeholder="Email" id="addEmail" name="email"
+                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                            </div>
+                            <div class="flex flex-col w-full gap-1">
+                                <label for="acces" class="block mb-2 text-sm font-medium text-gray-700">Acces</label>
+                                <div class="flex gap-5">
+
+                                    <div class="flex items-center">
+                                        <input id="accesCheckbox" type="checkbox" value=""
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                                        <label for="accesCheckbox"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="accesCheckbox" type="checkbox" value=""
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                                        <label for="accesCheckbox"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Export
+                                            Data</label>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <input id="accesCheckbox" type="checkbox" value=""
+                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
+                                        <label for="accesCheckbox"
+                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Import
+                                            Data</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div
+                            class="flex justify-end bg-gradient-to-r from-red-600 to-orange-700 rounded-b-xl h-14 items-center p-4">
+                            <button type="submit" class="flex p-2 rounded-lg font-semibold text-white">Add
+                                User</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>

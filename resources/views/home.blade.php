@@ -203,7 +203,8 @@
 
                                 <!-- Archive -->
                                 <button type="button" class="text-gray-400 hover:text-gray-500"
-                                    data-tooltip-target="archive-no-arrow" data-tooltip-placement="bottom">
+                                    data-tooltip-target="archive-no-arrow" data-tooltip-placement="bottom"
+                                    data-id="{{ $note->id }}">
                                     <i class="fas fa-archive"></i>
                                     <div id="archive-no-arrow" role="tooltip"
                                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
@@ -318,10 +319,10 @@
                             </div>
                             <div
                                 class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                <p class="flex text-xs text-white md:mt-1">Updated at 
+                                <p class="flex text-xs text-white md:mt-1">Updated at
                                     {{-- {{$note->updated_at}}</p> --}}
-                                <button id="saveNoteBtn" type="button"
-                                    class="flex font-semibold text-white">Save</button>
+                                    <button id="saveNoteBtn" type="button"
+                                        class="flex font-semibold text-white">Save</button>
                             </div>
                         </div>
                     </div>

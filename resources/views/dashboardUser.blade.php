@@ -60,9 +60,9 @@
 
             <div class="flex gap-2">
                 <input type="text" placeholder="Search" id="userSearchInput"
-                    class="w-full min-w-48 md:min-w-64 h-full md:p-2 rounded-xl border border-gray-300 placeholder:font-semibold placeholder:px-1 focus:outline-none">
+                    class="w-full min-w-48 md:min-w-64 h-full md:p-2 rounded-xl border border-gray-300 placeholder:font-semibold placeholder:px-1 focus:outline-none shadow-sm">
                 <button type="button" data-modal-target="modalAddUser" data-modal-toggle="modalAddUser"
-                    class="w-full min-w-24 md:min-w-32 h-full md:p-2 rounded-xl bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold"><i
+                    class="w-full min-w-24 md:min-w-32 h-full md:p-2 rounded-xl bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 hover:shadow-lg text-white font-semibold shadow-md"><i
                         class="fa fa-plus text-md me-2 text-normal" href="#"></i>Add
                     User</button>
             </div>
@@ -70,64 +70,74 @@
 
         <!-- modal add user -->
         <div id="modalAddUser" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full bg-black/30">
 
-            <div class="relative w-full max-w-lg max-h-full p-4">
+            <div class="relative w-full max-w-lg mx-auto my-auto p-4">
 
                 <form method="POST" action="{{ route('user.store') }}">
                     @csrf
-                    <div class="relative bg-white rounded-2xl shadow-sm flex flex-col">
-                        <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">ADD USER</a>
-                        <!-- main modal add user-->
-                        <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
-                            <div class="flex flex-col w-full">
-                                <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
-                                    Name</label>
-                                <input type="text" placeholder="Username" id="addName" name="name"
-                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                            </div>
-                            <div class="flex flex-col w-full">
-                                <label for="pass"
-                                    class="block mb-2 text-sm font-medium text-gray-700">Password</label>
-                                <input type="password" placeholder="Password" id="addPassword" name="password"
-                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                            </div>
-                            <div class="flex flex-col w-full">
-                                <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
-                                <input type="text" placeholder="Email" id="addEmail" name="email"
-                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                            </div>
-                            <div class="flex flex-col w-full gap-1">
-                                <label for="acces" class="block mb-2 text-sm font-medium text-gray-700">Acces</label>
-                                <div class="flex gap-5">
+                    <div class="bg-white rounded-2xl shadow-lg">
+                        <!-- Header -->
+                        <div class="text-center border-b p-5">
+                            <h2 class="text-lg font-semibold text-gray-800">ADD NEW USER</h2>
+                        </div>
 
-                                    <div class="flex items-center">
-                                        <input id="accesCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                        <label for="accesCheckbox"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="accesCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                        <label for="accesCheckbox"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Export
-                                            Data</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="accesCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                        <label for="accesCheckbox"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Import
-                                            Data</label>
-                                    </div>
+                        <!-- Body -->
+                        <div class="p-6 grid gap-5">
+                            <!-- Username -->
+                            <div class="flex flex-col">
+                                <label for="addName" class="mb-1 text-sm font-medium text-gray-700">Username</label>
+                                <input type="text" name="name" id="addName" placeholder="Masukkan nama"
+                                    class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                                    required>
+                            </div>
+
+                            <!-- Password -->
+                            <div class="flex flex-col">
+                                <label for="addPassword" class="mb-1 text-sm font-medium text-gray-700">Password</label>
+                                <input type="password" name="password" id="addPassword" placeholder="Masukkan password"
+                                    class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                                    required>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="flex flex-col">
+                                <label for="addEmail" class="mb-1 text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" name="email" id="addEmail" placeholder="Masukkan email"
+                                    class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none"
+                                    required>
+                            </div>
+
+                            <!-- Access Roles -->
+                            <div class="flex flex-col">
+                                <label class="mb-1 text-sm font-medium text-gray-700">Acces</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="roles[]" value="admin"
+                                            class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                                        <span class="ml-2 text-sm text-gray-700">Admin</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="roles[]" value="export"
+                                            class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                                        <span class="ml-2 text-sm text-gray-700">Export Data</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="roles[]" value="import"
+                                            class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                                        <span class="ml-2 text-sm text-gray-700">Import Data</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
+
+                        <!-- Footer -->
                         <div
-                            class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-xl h-14 items-center p-4">
-                            <button type="submit" class="flex p-2 rounded-lg font-semibold text-white">Add
-                                User</button>
+                            class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-2xl px-6 py-3">
+                            <button type="submit"
+                                class="text-white bg-white/10 hover:bg-white/20 px-5 py-2 rounded-lg font-semibold transition">
+                                Add User
+                            </button>
                         </div>
                     </div>
                 </form>
@@ -135,8 +145,10 @@
             </div>
         </div>
 
+
         <!-- user data -->
-        <div class="flex h-full max-h-11 gap-2 bg-gray-100 p-2 px-4 rounded-xl items-center">
+        <div
+            class="flex h-full max-h-11 gap-2 bg-gray-100 p-2 px-4 rounded-xl items-center bg-gradient-to-b from-gray-100 to-gray-200 shadow-sm">
             <div class="flex gap-3 items-center w-2/5">
                 <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
                 <a class="flex text-sm text-gray-500 font-semibold">User name</a>
@@ -164,17 +176,21 @@
 
                     <div class="flex items-center w-2/5 gap-3">
                         <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
-                        <button id="profileButton" type="button" class="flex rounded-full focus:outline-none">
+                        <button id="profileButton" type="button"
+                            class="flex rounded-full focus:outline-none shadow-md">
                             <img alt="profile" class="rounded-full w-9 h-9 object-cover"
                                 src="https://storage.googleapis.com/a1aa/image/778a18a0-4a4f-46b0-57e0-c4f3909279ce.jpg" />
                         </button>
                         <a class="flex text-sm text-gray-500 font-semibold">{{ Str::limit($user->name, 15) }}</a>
                     </div>
                     <div class="w-2/5 flex items-center gap-2">
-                        <a class="text-xs text-sky-700 font-semibold border border-sky-300 p-1 rounded-full">Admin</a>
-                        <a class="text-xs text-green-700 font-semibold border border-green-300 p-1 rounded-full">Import
+                        <a
+                            class="text-xs text-white bg-gradient-to-r from-blue-400 to-blue-500 font-semibold p-1 rounded-full p-1.5 shadow-sm">Admin</a>
+                        <a
+                            class="text-xs text-white bg-gradient-to-r from-green-400 to-green-500 font-semibold p-1 rounded-full p-1.5 shadow-sm">Import
                             Data</a>
-                        <a class="text-xs text-purple-700 font-semibold border border-purple-300 p-1 rounded-full">Export
+                        <a
+                            class="text-xs text-white bg-gradient-to-r from-purple-400 to-purple-500 font-semibold p-1 rounded-full p-1.5 shadow-sm">Export
                             Data</a>
                     </div>
                     <div class="w-1/3">
@@ -201,194 +217,139 @@
 
                 <!-- Dropdown menu -->
                 <div id="dropdownDelay{{ $user->id }}"
-                    class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow-md w-32">
-                    <ul class="py-2 text-sm text-gray-700" aria-labelledby="dropdownDelayButton{{ $user->id }}">
+                    class="z-10 hidden bg-white rounded-xl shadow-md w-36 border border-gray-100">
+                    <ul class="py-1 text-sm text-gray-700" aria-labelledby="dropdownDelayButton{{ $user->id }}">
+                        <!-- Edit User -->
                         <li>
                             <button type="button" data-modal-target="modalEditUser"
                                 data-modal-toggle="modalEditUser" data-id="{{ $user->id }}"
                                 data-user="{{ $user->name }}" data-password="{{ $user->password }}"
                                 data-email="{{ $user->email }}"
-                                class="block px-4 py-2 hover:bg-gray-100 edit-user">Edit User</button>
+                                class="flex items-center w-full px-4 py-2 hover:bg-gray-100 rounded-t-xl transition edit-user">
+                                Edit User
+                            </button>
                         </li>
+
+                        <!-- Delete Account -->
                         <li>
                             <button type="button" data-modal-target="modalDeleteUser"
                                 data-modal-toggle="modalDeleteUser"
-                                class="block px-4 py-2 hover:bg-gray-100 deleteUserBtn"
-                                data-username="{{ $user->name }}" data-userid="{{ $user->id }}">Delete
-                                Account</button>
+                                class="flex items-center w-full px-4 py-2 text-red-600 hover:bg-red-50 rounded-b-xl transition deleteUserBtn"
+                                data-username="{{ $user->name }}" data-userid="{{ $user->id }}">
+                                Delete
+                            </button>
                         </li>
                     </ul>
                 </div>
             @endforeach
         </div>
 
-
-        <!-- modal Detail USER -->
-        <div id="modalDetailUser" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
-
-            <div class="relative w-full max-w-lg max-h-full p-4">
-
-                <div class="relative bg-white rounded-2xl shadow-sm flex flex-col">
-                    <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">DETAIL USER</a>
-                    <!-- main modal add user-->
-                    <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
-                        <div class="flex flex-col w-full">
-                            <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
-                                Name</label>
-                            <input type="text" placeholder="Username" id="addName"
-                                class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label for="pass"
-                                class="block mb-2 text-sm font-medium text-gray-700">Password</label>
-                            <input type="password" placeholder="Password" id="addPassword"
-                                class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                        </div>
-                        <div class="flex flex-col w-full">
-                            <label for="email" class="block mb-2 text-sm font-medium text-gray-700">Email</label>
-                            <input type="text" placeholder="Email" id="addEmail"
-                                class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
-                        </div>
-                        <div class="flex flex-col w-full gap-1">
-                            <label for="acces" class="block mb-2 text-sm font-medium text-gray-700">Acces</label>
-                            <div class="flex gap-5">
-                                <div class="flex items-center">
-                                    <input id="accesCheckbox" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                    <label for="accesCheckbox"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="accesCheckbox" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                    <label for="accesCheckbox"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Export
-                                        Data</label>
-                                </div>
-                                <div class="flex items-center">
-                                    <input id="accesCheckbox" type="checkbox" value=""
-                                        class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                    <label for="accesCheckbox"
-                                        class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Import
-                                        Data</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div
-                        class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-xl h-14 items-center p-4">
-                        <button type="button" class="flex p-2 rounded-lg font-semibold text-white">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
         <!-- modal Edit USER -->
         <div id="modalEditUser" tabindex="-1" aria-hidden="true"
-            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full bg-black/30">
 
-            <div class="relative w-full max-w-lg max-h-full p-4">
+            <div class="relative w-full max-w-lg max-h-full mx-auto my-auto p-4">
+                <form method="POST" action="" id="formEditUser">
+                    @csrf
+                    @method('PUT')
 
-                <div class="relative bg-white rounded-2xl shadow-sm flex flex-col">
-                    <a class="flex text-gray-900 font-semibold text-lg justify-center p-4">EDIT USER</a>
-                    <!-- main modal add user-->
+                    <div class="bg-white rounded-t-2xl shadow-lg">
+                        <!-- header -->
+                        <div class="text-center border-b p-5">
+                            <h2 class="text-lg font-semibold text-gray-800">EDIT USER</h2>
+                        </div>
 
-                    <form method="POST" action="" id="formEditUser">
-                        @csrf
-                        @method('PUT') <!-- Untuk update -->
-                        <div class="relative flex flex-col gap-5 grid-cols-2 p-4 mb-4">
-
+                        <!-- body -->
+                        <div class="p-6 grid gap-5">
                             <input type="hidden" id="editUserId" name="id">
-
-                            <div class="flex flex-col w-full">
+                            <!-- username -->
+                            <div class="flex flex-col">
                                 <label for="name" class="block mb-2 text-sm font-medium text-gray-700">User
                                     Name</label>
                                 <input type="text" placeholder="Username" id="editUserName" name="name"
-                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                                    class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none">
                             </div>
-                            <div class="flex flex-col w-full">
+
+                            <!-- pass -->
+                            <div class="flex flex-col">
                                 <label for="pass"
                                     class="block mb-2 text-sm font-medium text-gray-700">Password</label>
                                 <input type="password" placeholder="Password" id="editUserPassword" name="password"
-                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                                    class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none">
                             </div>
-                            <div class="flex flex-col w-full">
+
+                            <!-- email -->
+                            <div class="flex flex-col">
                                 <label for="email"
                                     class="block mb-2 text-sm font-medium text-gray-700">Email</label>
                                 <input type="email" placeholder="Email" id="editUserEmail" name="email"
-                                    class="p-2 w-full rounded-lg border border-gray-200 focus:outline-none">
+                                    class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none">
                             </div>
-                            <div class="flex flex-col w-full gap-1">
-                                <label for="acces"
-                                    class="block mb-2 text-sm font-medium text-gray-700">Acces</label>
-                                <div class="flex gap-5">
-                                    <div class="flex items-center">
-                                        <input id="accesCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                        <label for="accesCheckbox"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Admin</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="accesCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                        <label for="accesCheckbox"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Export
-                                            Data</label>
-                                    </div>
-                                    <div class="flex items-center">
-                                        <input id="accesCheckbox" type="checkbox" value=""
-                                            class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded-sm focus:ring-blue-500 focus:ring-2">
-                                        <label for="accesCheckbox"
-                                            class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Import
-                                            Data</label>
-                                    </div>
+
+                            <div class="flex flex-col">
+                                <label class="mb-1 text-sm font-medium text-gray-700">Acces</label>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="roles[]" value="admin"
+                                            class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                                        <span class="ml-2 text-sm text-gray-700">Admin</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="roles[]" value="export"
+                                            class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                                        <span class="ml-2 text-sm text-gray-700">Export Data</span>
+                                    </label>
+                                    <label class="inline-flex items-center">
+                                        <input type="checkbox" name="roles[]" value="import"
+                                            class="w-4 h-4 text-orange-600 border-gray-300 rounded focus:ring-orange-500">
+                                        <span class="ml-2 text-sm text-gray-700">Import Data</span>
+                                    </label>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-xl h-14 items-center p-4">
-                            <button type="submit" id="saveEditUser"
-                                class="flex p-2 rounded-lg font-semibold text-white">Save</button>
-                        </div>
+                    </div>
+                    <!-- footer -->
+                    <div class="flex justify-end bg-gradient-to-r from-red-600 to-orange-600 rounded-b-2xl px-6 py-3">
+                        <button type="submit" id="saveEditUser"
+                            class="text-white bg-white/10 hover:bg-white/20 px-5 py-2 rounded-lg font-semibold transition">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- modal delete user -->
+    <div id="modalDeleteUser" tabindex="-1"
+        class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="p-4 w-112 max-h-full">
+            <div class="relative bg-white rounded-3xl shadow-sm">
+                <div class="p-5 md:p-7 text-center">
+                    <svg class="mx-auto mb-4 text-red-400 w-12 h-12" aria-hidden="true"
+                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                    </svg>
+                    <h3 class="mb-5 text-md font-normal text-gray-700">
+                        Are you sure you want to delete <span id="deleteUserName"
+                            class="text-gray-900 font-semibold">(nama user)</span> ?
+                    </h3>
+
+                    <form method="POST" id="deleteUserModal" action="{{ route('user.destroy', $user->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button data-modal-hide="trash-modal" type="submit"
+                            class="text-white bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600  font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center shadow-md hover:shadow-lg">
+                            Yes, I'm sure
+                        </button>
+
+                        <button data-modal-hide="trash-modal" type="button"
+                            class="py-2.5 px-5 ms-3 text-sm font-medium bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-600  focus:outline-none rounded-3xl shadow-md hover:shadow-lg">No,
+                            cancel</button>
                     </form>
                 </div>
             </div>
         </div>
-
-        <!-- modal delete user -->
-        <div id="modalDeleteUser" tabindex="-1"
-            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="p-4 w-112 max-h-full">
-                <div class="relative bg-white rounded-3xl shadow-sm">
-                    <div class="p-4 md:p-5 text-center">
-                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg>
-                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                            Are you sure you want to delete <span id="deleteUserName"
-                                class="text-red-600 font-semibold">(nama user)</span> ?
-                        </h3>
-
-                        <form method="POST" id="deleteUserModal" action="{{ route('user.destroy', $user->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button data-modal-hide="trash-modal" type="submit"
-                                class="text-white bg-gradient-to-r from-red-600 to-orange-600 font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                Yes, I'm sure
-                            </button>
-
-
-                            <button data-modal-hide="trash-modal" type="button"
-                                class="py-2.5 px-5 ms-3 text-sm font-medium bg-gray-100 text-gray-600 focus:outline-none rounded-3xl">No,
-                                cancel</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    </div>
 
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

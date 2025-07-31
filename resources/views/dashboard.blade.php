@@ -43,11 +43,88 @@
         </div>
     </aside>
 
-    <div class="w-full h-full flex flex-col bg-white rounded-xl shadow-lg p-5 gap-5">
-        <div class="flex flex-col gap-1">
-            <a class="text-2xl font-semibold">Dashboard</a>
-            <a class="text-sm font-semibold text-gray-500">Manage your database in here!</a>
+    <div class="md:w-full h-full flex flex-col bg-white rounded-xl shadow-lg p-3 sm:p-4">
+        <div class="flex flex-col gap-1 mb-7">
+            <a class="text-2xl font-semibold">Dashboard Management</a>
+            <a class="text-sm font-semibold text-gray-500">Manage your database in here.</a>
         </div>
+
+        <!-- Section: Summary Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-32">
+            <div class="bg-gradient-to-r from-orange-400 to-orange-500 p-4 rounded-xl shadow-md">
+                <p class="text-md text-white">Catatan Hari</p>
+                <h2 class="text-2xl font-bold text-white">5</h2>
+            </div>
+            <div class="bg-gradient-to-r from-purple-400 to-purple-500 p-4 rounded-xl shadow-md">
+                <p class="text-md text-white">Total Catatan</p>
+                <h2 class="text-2xl font-bold text-white">128</h2>
+            </div>
+            <div class="bg-gradient-to-r from-blue-400 to-blue-500 p-4 rounded-xl shadow-md">
+                <p class="text-md text-white">Catatan Diarsipkan</p>
+                <h2 class="text-2xl font-bold text-white">22</h2>
+            </div>
+            <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 p-4 rounded-xl shadow-md">
+                <p class="text-md text-white">Total Pengguna</p>
+                <h2 class="text-2xl font-bold text-white">3</h2>
+            </div>
+        </div>
+
+        <!-- Section: Catatan Terbaru -->
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold text-[#1E1E2D] mb-3">New Notes</h3>
+            <ul class="  gap-4 grid grid-cols-1 md:grid-cols-2">
+                <li
+                    class="bg-gradient-to-r from-gray-100 to-gray-200  rounded-md p-3 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="font-medium text-gray-800">Judul Catatan: Belajar Laravel</p>
+                        <p class="text-xs text-gray-500">Ditambahkan: 29 Juli 2025</p>
+                    </div>
+                    <a href="#" class="text-sm hover:font-semibold text-gray-600 hover:underline me-3">View</a>
+                </li>
+                <li
+                    class="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-3 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="font-medium text-gray-800">Judul Catatan: Rencana Mingguan</p>
+                        <p class="text-xs text-gray-500">Ditambahkan: 28 Juli 2025</p>
+                    </div>
+                    <a href="#" class="text-sm text-gray-600 hover:underline me-3">View</a>
+                </li>
+                <li
+                    class="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-3 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="font-medium text-gray-800">Judul Catatan: Rencana Mingguan</p>
+                        <p class="text-xs text-gray-500">Ditambahkan: 28 Juli 2025</p>
+                    </div>
+                    <a href="#" class="text-sm text-gray-600 hover:underline me-3">View</a>
+                </li>
+                <li
+                    class="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-3 flex justify-between items-center shadow-sm">
+                    <div>
+                        <p class="font-medium text-gray-800">Judul Catatan: Rencana Mingguan</p>
+                        <p class="text-xs text-gray-500">Ditambahkan: 28 Juli 2025</p>
+                    </div>
+                    <a href="#" class="text-sm text-gray-600 hover:underline me-3">View</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Section: Aksi Cepat -->
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold text-[#1E1E2D] mb-3">View </h3>
+            <div class="flex gap-3 flex-wrap">
+                <a href=""
+                    class="flex items-center gap-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-300 transition shadow-sm">
+                    <i class="fas fa-list"></i> Lihat Semua Catatan
+                </a>
+                <a href=""
+                    class="flex items-center gap-2 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-500 text-sm font-medium px-4 py-2 rounded-md hover:from-blue-400 hover:to-blue-500 hover:text-white transition">
+                    <i class="fas fa-archive"></i> Lihat Arsip
+                </a>
+            </div>
+        </div>
+
+
+
     </div>
     <script src="{{ asset('js/app.js') }}"></script>
 </body>

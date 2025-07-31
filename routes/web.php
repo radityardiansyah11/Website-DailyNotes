@@ -28,13 +28,13 @@ Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');//a
 Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy'); //delete note
 Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update'); //edit note
 Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin'); //pin unpin note
-Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');//search note
 
 /* Dashboard */
 Route::get('/dashboardUser', [DashboardController::class, 'index'])->name('dashboardUser'); //get user
 Route::post('/user', [DashboardController::class, 'store'])->name('user.store'); //add user
 Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.update'); //edit user
 Route::delete('/user/{id}', [DashboardController::class, 'destroy'])->name('user.destroy'); //delete user
+Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');//search user
 
 /* page */
 Route::get('/login', function () {

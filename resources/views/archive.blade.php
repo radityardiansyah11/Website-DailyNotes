@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CatatanHarian</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="{{ asset('images/logo.png') }}" type="image/png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Alata&family=Archivo+Black&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/flowbite@1.6.5/dist/flowbite.min.js"></script>
@@ -108,7 +109,7 @@
                                 <span>•</span>
                                 <span>Persyaratan Layanan</span>
                             </div>
-                        </div>
+                        </div>  
 
                         <!-- modal logout-->
                         <div id="modalLogout" tabindex="-1" data-modal-placement="bottom-right"
@@ -157,6 +158,7 @@
                 <!-- main note -->
                 <div id="mainNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
+                    
                     <div
                         class="relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400">
                         <h2 class="font-semibold">Kegiatan hari ini</h2>

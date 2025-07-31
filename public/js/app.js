@@ -1,3 +1,6 @@
+/* -------------------------------------Front End----------------------------------------------- */
+
+
 /* profile */
 document.addEventListener("DOMContentLoaded", () => {
     const profileButton = document.getElementById('profileButton');
@@ -15,72 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 })
 
-/* pin note */
-document.addEventListener("DOMContentLoaded", () => {
-    const pinNotesContainer = document.getElementById("pinNotes");
-    const mainNotesContainer = document.getElementById("mainNotes");
-    const addPinNoteLabel = document.getElementById("addPinNotes");
-
-    function updatePinVisibility() {
-        addPinNoteLabel.style.display = pinNotesContainer.children.length === 0 ? 'none' : 'block';
-    }
-
-    updatePinVisibility();
-
-    document.addEventListener("click", function (e) {
-        const pinBtn = e.target.closest(".pin-btn");
-        if (pinBtn) {
-            const note = pinBtn.closest(".noteMain");
-            const isPinned = note.getAttribute("data-pinned") === "true";
-
-            if (isPinned) {
-                mainNotesContainer.appendChild(note);
-                note.setAttribute("data-pinned", "false");
-            } else {
-                pinNotesContainer.appendChild(note);
-                note.setAttribute("data-pinned", "true");
-            }
-
-            updatePinVisibility();
-
-            // Kirim ke server
-            const noteId = note.getAttribute("data-id");
-            fetch(`/notes/${noteId}/toggle-pin`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                }
-            })
-                .then(res => res.json())
-                .then(data => {
-                    if (!data.success) {
-                        alert("Gagal mem-pin note.");
-                    } else {
-                        // Optional: refresh jika kamu ingin update penuh
-                        // location.reload();
-                    }
-                })
-                .catch(err => {
-                    console.error("Error:", err);
-                    alert("Gagal terhubung ke server.");
-                });
-        }
-    });
-
-    // simpan ke DB (opsional)
-    const noteId = note.getAttribute("data-id");
-    fetch(`/notes/${noteId}/pin`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "X-CSRF-TOKEN": '{{ csrf_token() }}'
-        },
-        body: JSON.stringify({ pinned: !isPinned })
-    });
-
-});
-
+/* -----------------------------------------------Login System------------------------------------------ */
 
 /* loginRegister */
 document.addEventListener("DOMContentLoaded", () => {
@@ -99,6 +37,9 @@ document.addEventListener("DOMContentLoaded", () => {
         registerForm.classList.add('hidden')
     })
 })
+
+
+/* ---------------------------------------------------HOME------------------------------------------------- */
 
 /* auto height textarea ADD NOTE */
 //head
@@ -173,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     })
 })
 
+
 /* edit data modal dan view data heighyt */
 document.addEventListener("DOMContentLoaded", () => {
     const editButtons = document.querySelectorAll('.edit-btn');
@@ -233,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
-/* delete button */
+/* delete button Note*/
 let noteIdToDelete = null;
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -272,7 +214,74 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-/* search bar */
+/* pin note */
+document.addEventListener("DOMContentLoaded", () => {
+    const pinNotesContainer = document.getElementById("pinNotes");
+    const mainNotesContainer = document.getElementById("mainNotes");
+    const addPinNoteLabel = document.getElementById("addPinNotes");
+
+    function updatePinVisibility() {
+        addPinNoteLabel.style.display = pinNotesContainer.children.length === 0 ? 'none' : 'block';
+    }
+
+    updatePinVisibility();
+
+    document.addEventListener("click", function (e) {
+        const pinBtn = e.target.closest(".pin-btn");
+        if (pinBtn) {
+            const note = pinBtn.closest(".noteMain");
+            const isPinned = note.getAttribute("data-pinned") === "true";
+
+            if (isPinned) {
+                mainNotesContainer.appendChild(note);
+                note.setAttribute("data-pinned", "false");
+            } else {
+                pinNotesContainer.appendChild(note);
+                note.setAttribute("data-pinned", "true");
+            }
+
+            updatePinVisibility();
+
+            // Kirim ke server
+            const noteId = note.getAttribute("data-id");
+            fetch(`/notes/${noteId}/toggle-pin`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (!data.success) {
+                        alert("Gagal mem-pin note.");
+                    } else {
+                        // Optional: refresh jika kamu ingin update penuh
+                        // location.reload();
+                    }
+                })
+                .catch(err => {
+                    console.error("Error:", err);
+                    alert("Gagal terhubung ke server.");
+                });
+        }
+    });
+
+    // simpan ke DB (opsional)
+    const noteId = note.getAttribute("data-id");
+    fetch(`/notes/${noteId}/pin`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": '{{ csrf_token() }}'
+        },
+        body: JSON.stringify({ pinned: !isPinned })
+    });
+
+});
+
+
+/* search bar Note*/
 document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     const mainNotesContainer = document.getElementById('mainNotes');
@@ -335,6 +344,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     });
 });
+
+/* ------------------------------------------USER/DASHBOARD------------------------------------------------ */
 
 /* search user */
 document.addEventListener('DOMContentLoaded', () => {
