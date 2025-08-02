@@ -36,6 +36,9 @@ Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.upd
 Route::delete('/user/{id}', [DashboardController::class, 'destroy'])->name('user.destroy'); //delete user
 Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');//search user
 
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+
+
 /* page */
 Route::get('/login', function () {
     return view('login');
@@ -61,7 +64,4 @@ Route::get('/notification', function () {
     return view('notification');
 })->name('notification');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
 

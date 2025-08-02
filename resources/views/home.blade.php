@@ -61,7 +61,7 @@
                 <div class="flex sm:flex-row flex-1 items-start sm:items-center gap-4">
                     <h1 class="text-md sm:text-2xl font-semibold">My Notes</h1>
                     <input type="text" id="searchInput"
-                        class="w-full sm:w-48 md:w-64 lg:w-96 lg:h-10 bg-gray-100 rounded-3xl px-4 py-2 placeholder-gray-500 text-sm focus:outline-none"
+                        class="w-full sm:w-48 md:w-64 lg:w-96 lg:h-10 bg-gray-100 rounded-3xl px-4 py-2 placeholder-gray-500 text-sm focus:outline-none shadow-sm"
                         placeholder="Search">
                 </div>
 
@@ -69,7 +69,7 @@
                 <div class="flex items-center gap-4">
                     <!-- button add -->
                     <button type="button" data-modal-target="modalAddNote" data-modal-toggle="modalAddNote"
-                        class="bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-600 hover:to-orange-700 text-white rounded-3xl px-5 py-2.5 text-sm font-medium"
+                        class="bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-500 hover:to-red-600 text-white rounded-3xl px-5 py-2.5 text-sm font-medium shadow-md"
                         href="#">Add Notes</button>
 
                     <!-- modal add note -->
@@ -91,7 +91,9 @@
                                     </div>
                                     <div
                                         class="flex justify-end p-4 md:p-5 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                        <button type="submit" class="flex font-semibold text-white">Add Note</button>
+                                        <button type="submit"
+                                            class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">Add
+                                            Note</button>
                                     </div>
                                 </div>
                             </form>
@@ -101,7 +103,8 @@
                     <!-- PROFILE SECTION -->
                     <div class="relative">
                         <!-- Trigger Button -->
-                        <button id="profileButton" type="button" class="flex rounded-full focus:outline-none">
+                        <button id="profileButton" type="button"
+                            class="flex rounded-full focus:outline-none shadow-md">
                             <img alt="profile" class="rounded-full w-10 h-10 object-cover"
                                 src="https://storage.googleapis.com/a1aa/image/778a18a0-4a4f-46b0-57e0-c4f3909279ce.jpg" />
                         </button>
@@ -121,12 +124,12 @@
                                 <p class="flex text-sm text-gray-500">{{ Auth::user()->email }}</p>
                                 <div class="flex flex-row gap-2 w-full">
                                     <button
-                                        class="w-24 mt-4 flex-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-full py-2 text-white text-sm font-semibold hover:bg-[#3c4043] focus:outline-none">
+                                        class="w-24 mt-4 flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-500 hover:to-red-600 rounded-full py-2 text-white text-sm font-semibold focus:outline-none">
                                         Manage Account
                                     </button>
                                     <button type="button" data-modal-target="modalLogout"
                                         data-modal-toggle="modalLogout"
-                                        class="w-24 mt-4 flex-1 bg-gradient-to-r from-red-600 to-orange-600 rounded-full py-2 text-white text-sm font-semibold hover:bg-[#3c4043] focus:outline-none">
+                                        class="w-24 mt-4 flex-1 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-500 hover:to-red-600 rounded-full py-2 text-white text-sm font-semibold hover:bg-[#3c4043] focus:outline-none">
                                         <i class="fas fa-sign-out-alt text-base"></i> Logout
                                     </button>
                                     </form>
@@ -183,7 +186,7 @@
                 <div id="pinNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
                     @foreach ($pinnedNotes as $note)
-                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
+                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400 hover:shadow-md"
                             data-id="{{ $note->id }}" data-pinned="true">
                             <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>
                             <p class="text-sm mt-3 break-all">{{ Str::limit($note->content, 170) }}</p>
@@ -197,7 +200,7 @@
                                     <i class="fas fa-thumbtack"></i>
                                     <div id="pin-no-arrow" role="tooltip"
                                         class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white bg-gray-700 rounded-3xl shadow-xs opacity-0 tooltip dark:bg-gray-600 pin-button">
-                                        Pin
+                                        Unin
                                     </div>
                                 </button>
 
@@ -246,7 +249,7 @@
                 <div id="mainNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
                     @foreach ($otherNotes as $note)
-                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400"
+                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-200 hover:shadow-md"
                             data-id="{{ $note->id }}" data-pinned="{{ $note->pinned ? 'true' : 'false' }}">
 
                             <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>
@@ -317,12 +320,16 @@
                                 <textarea id="textAreaNoteContent" placeholder="Text"
                                     class="w-full p-4 text-md bg-gray-100 placeholder:text-md focus:outline-none no-scrollbar"></textarea>
                             </div>
+                            <!-- Footer -->
                             <div
-                                class="flex justify-between p-3 md:p-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                                <p class="flex text-xs text-white md:mt-1">Updated at
-                                    {{-- {{$note->updated_at}}</p> --}}
-                                    <button id="saveNoteBtn" type="button"
-                                        class="flex font-semibold text-white">Save</button>
+                                class="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                                <p class="text-xs text-white">Updated at
+                                    {{-- {{$note->updated_at}} --}}
+                                </p>
+                                <button id="saveNoteBtn" type="button"
+                                    class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">
+                                    Simpan
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -333,22 +340,22 @@
                     class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
                     <div class="p-4 w-112 max-h-full">
                         <div class="relative bg-white rounded-3xl shadow-sm">
-                            <div class="p-4 md:p-5 text-center">
-                                <svg class="mx-auto mb-4 text-gray-400 w-12 h-12" aria-hidden="true"
+                            <div class="p-5 md:p-7 text-center">
+                                <svg class="mx-auto mb-4 text-orange-400 w-12 h-12" aria-hidden="true"
                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
                                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                         stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                 </svg>
-                                <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are
+                                <h3 class="mb-5 text-md font-normal text-gray-500 dark:text-gray-400">Are
                                     you sure you want to delete this note?</h3>
 
                                 <button data-modal-hide="trash-modal" type="button" id="confirmDeleteBtn"
-                                    class="text-white bg-gradient-to-r from-red-600 to-orange-600 font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center  ">
+                                    class="text-white bg-gradient-to-r from-orange-400 to-orange-500 hover:from-orange-500 hover:to-orange-600 font-medium rounded-3xl text-sm inline-flex items-center px-5 py-2.5 text-center  ">
                                     Yes, I'm sure
                                 </button>
                                 <button data-modal-hide="trash-modal" type="button"
                                     onclick="document.getElementById('modalDeleteNote').classList.add('hidden')"
-                                    class="py-2.5 px-5 ms-3 text-sm font-medium bg-gray-100 text-gray-600 focus:outline-none rounded-3xl">No,
+                                    class="py-2.5 px-5 ms-3 text-sm font-medium bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 text-gray-600 focus:outline-none rounded-3xl">No,
                                     cancel</button>
                             </div>
                         </div>

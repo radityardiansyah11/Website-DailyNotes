@@ -170,7 +170,7 @@
             </div>
         </div>
 
-        <div id="userSearchResults">
+        <div id="userSearchResults" class="overflow-y-auto max-h-[500px] no-scrollbar">
             @foreach ($users as $user)
                 <div class="flex items-center p-2 px-4 py-4 border-b">
 
@@ -184,8 +184,8 @@
                         <a class="flex text-sm text-gray-500 font-semibold">{{ Str::limit($user->name, 15) }}</a>
                     </div>
                     <div class="w-2/5 flex items-center gap-2">
-                        <a
-                            class="text-xs text-white bg-gradient-to-r from-blue-400 to-blue-500 font-semibold p-1 rounded-full p-1.5 shadow-sm">Admin</a>
+                        {{-- <a
+                            class="text-xs text-white bg-gradient-to-r from-blue-400 to-blue-500 font-semibold p-1 rounded-full p-1.5 shadow-sm">Admin</a> --}}
                         <a
                             class="text-xs text-white bg-gradient-to-r from-green-400 to-green-500 font-semibold p-1 rounded-full p-1.5 shadow-sm">Import
                             Data</a>

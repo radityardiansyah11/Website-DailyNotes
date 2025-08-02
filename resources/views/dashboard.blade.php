@@ -43,7 +43,7 @@
         </div>
     </aside>
 
-    <div class="md:w-full h-full flex flex-col bg-white rounded-xl shadow-lg p-3 sm:p-4">
+    <div class="md:w-full h-full flex flex-col bg-white rounded-xl shadow-lg p-3 sm:p-4 overflow-y-auto no-scrollbar">
         <div class="flex flex-col gap-1 mb-7">
             <a class="text-2xl font-semibold">Dashboard Management</a>
             <a class="text-sm font-semibold text-gray-500">Manage your database in here.</a>
@@ -52,20 +52,20 @@
         <!-- Section: Summary Cards -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-32">
             <div class="bg-gradient-to-r from-orange-400 to-orange-500 p-4 rounded-xl shadow-md">
-                <p class="text-md text-white">Catatan Hari</p>
+                <p class="text-md text-white">Catatan Hari ini</p>
                 <h2 class="text-2xl font-bold text-white">5</h2>
             </div>
             <div class="bg-gradient-to-r from-purple-400 to-purple-500 p-4 rounded-xl shadow-md">
                 <p class="text-md text-white">Total Catatan</p>
-                <h2 class="text-2xl font-bold text-white">128</h2>
+                <h2 class="text-2xl font-bold text-white">{{ $noteCount }}</h2>
             </div>
             <div class="bg-gradient-to-r from-blue-400 to-blue-500 p-4 rounded-xl shadow-md">
                 <p class="text-md text-white">Catatan Diarsipkan</p>
-                <h2 class="text-2xl font-bold text-white">22</h2>
+                <h2 class="text-2xl font-bold text-white">{{ $archivedCount }}</h2>
             </div>
             <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 p-4 rounded-xl shadow-md">
                 <p class="text-md text-white">Total Pengguna</p>
-                <h2 class="text-2xl font-bold text-white">3</h2>
+                <h2 class="text-2xl font-bold text-white">{{ $userCount }}</h2>
             </div>
         </div>
 
@@ -73,38 +73,19 @@
         <div class="mt-6">
             <h3 class="text-lg font-semibold text-[#1E1E2D] mb-3">New Notes</h3>
             <ul class="  gap-4 grid grid-cols-1 md:grid-cols-2">
-                <li
-                    class="bg-gradient-to-r from-gray-100 to-gray-200  rounded-md p-3 flex justify-between items-center shadow-sm">
-                    <div>
-                        <p class="font-medium text-gray-800">Judul Catatan: Belajar Laravel</p>
-                        <p class="text-xs text-gray-500">Ditambahkan: 29 Juli 2025</p>
-                    </div>
-                    <a href="#" class="text-sm hover:font-semibold text-gray-600 hover:underline me-3">View</a>
-                </li>
-                <li
-                    class="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-3 flex justify-between items-center shadow-sm">
-                    <div>
-                        <p class="font-medium text-gray-800">Judul Catatan: Rencana Mingguan</p>
-                        <p class="text-xs text-gray-500">Ditambahkan: 28 Juli 2025</p>
-                    </div>
-                    <a href="#" class="text-sm text-gray-600 hover:underline me-3">View</a>
-                </li>
-                <li
-                    class="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-3 flex justify-between items-center shadow-sm">
-                    <div>
-                        <p class="font-medium text-gray-800">Judul Catatan: Rencana Mingguan</p>
-                        <p class="text-xs text-gray-500">Ditambahkan: 28 Juli 2025</p>
-                    </div>
-                    <a href="#" class="text-sm text-gray-600 hover:underline me-3">View</a>
-                </li>
-                <li
-                    class="bg-gradient-to-r from-gray-100 to-gray-200 rounded-md p-3 flex justify-between items-center shadow-sm">
-                    <div>
-                        <p class="font-medium text-gray-800">Judul Catatan: Rencana Mingguan</p>
-                        <p class="text-xs text-gray-500">Ditambahkan: 28 Juli 2025</p>
-                    </div>
-                    <a href="#" class="text-sm text-gray-600 hover:underline me-3">View</a>
-                </li>
+                @forelse ($recentNotes as $note)
+                    <li
+                        class="bg-gradient-to-r from-gray-100 to-gray-200  rounded-md p-3 flex justify-between items-center shadow-sm">
+                        <div>
+                            <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
+                            <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
+                        </div>
+                        <a href="#"
+                            class="text-sm hover:font-semibold text-gray-600 hover:underline me-3">View</a>
+                    </li>
+                @empty
+                    <li class="text-sm text-gray-500">Belum ada catatan</li>
+                @endforelse
             </ul>
         </div>
 
@@ -121,6 +102,22 @@
                     <i class="fas fa-archive"></i> Lihat Arsip
                 </a>
             </div>
+
+            <ul class="gap-4 grid grid-cols-1 md:grid-cols-2 mt-6">
+                @forelse ($allNotes as $note)
+                    <li
+                        class="bg-gradient-to-r from-gray-100 to-gray-200  rounded-md p-3 flex justify-between items-center shadow-sm">
+                        <div>
+                            <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
+                            <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
+                        </div>
+                        <a href="#"
+                            class="text-sm hover:font-semibold text-gray-600 hover:underline me-3">View</a>
+                    </li>
+                @empty
+                    <li class="text-sm text-gray-500">Belum ada catatan</li>
+                @endforelse
+            </ul>
         </div>
 
 
