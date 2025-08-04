@@ -172,7 +172,7 @@
 
         <div id="userSearchResults" class="overflow-y-auto max-h-[500px] no-scrollbar">
             @foreach ($users as $user)
-                <div class="flex items-center p-2 px-4 py-4 border-b">
+                <div class="flex items-center p-2 px-4 py-4 border-b hover:bg-gray-50">
 
                     <div class="flex items-center w-2/5 gap-3">
                         <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">

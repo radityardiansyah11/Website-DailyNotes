@@ -75,13 +75,13 @@
             <ul class="  gap-4 grid grid-cols-1 md:grid-cols-2">
                 @forelse ($recentNotes as $note)
                     <li
-                        class="bg-gradient-to-r from-gray-100 to-gray-200  rounded-md p-3 flex justify-between items-center shadow-sm">
+                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm">
                         <div>
                             <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
                             <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
                         </div>
                         <a href="#"
-                            class="text-sm hover:font-semibold text-gray-600 hover:underline me-3">View</a>
+                            class="text-sm hover:font-semibold hover:underline-none text-gray-600 me-3">View</a>
                     </li>
                 @empty
                     <li class="text-sm text-gray-500">Belum ada catatan</li>
@@ -106,7 +106,7 @@
             <ul class="gap-4 grid grid-cols-1 md:grid-cols-2 mt-6">
                 @forelse ($allNotes as $note)
                     <li
-                        class="bg-gradient-to-r from-gray-100 to-gray-200  rounded-md p-3 flex justify-between items-center shadow-sm">
+                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm">
                         <div>
                             <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
                             <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
@@ -119,8 +119,6 @@
                 @endforelse
             </ul>
         </div>
-
-
 
     </div>
     <script src="{{ asset('js/app.js') }}"></script>

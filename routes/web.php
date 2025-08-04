@@ -15,8 +15,6 @@ Route::post('/register', [AuthController::class, 'register'])->middleware('guest
 
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 // Hanya bisa diakses oleh guest (belum login)
-Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest'); //log reg acces guest login
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest'); // log reg acces guest
 // Harus login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
@@ -36,13 +34,10 @@ Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.upd
 Route::delete('/user/{id}', [DashboardController::class, 'destroy'])->name('user.destroy'); //delete user
 Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');//search user
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 
 /* page */
-Route::get('/login', function () {
-    return view('login');
-})->name('login');
 
 Route::get('/index', function () {
     return view('index');
