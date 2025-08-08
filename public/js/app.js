@@ -1,4 +1,13 @@
 /* -------------------------------------Front End----------------------------------------------- */
+document.addEventListener("DOMContentLoaded", () => {
+    const items = document.querySelectorAll(".note-item");
+    items.forEach((item, index) => {
+        setTimeout(() => {
+            item.classList.remove("opacity-0", "translate-y-4");
+            item.classList.add("opacity-100", "translate-y-0");
+        }, index * 150); // Delay per item (150ms antar item)
+    });
+});
 
 
 /* profile */
@@ -446,6 +455,26 @@ document.addEventListener("DOMContentLoaded", function () {
         })
     })
 })
+
+/* modal new note dashboard*/
+document.addEventListener('DOMContentLoaded', () => {
+    const titleField = document.getElementById('modalNewTitle');
+    const contentField = document.getElementById('modalNewContent');
+    const createdField = document.getElementById('modalNewCreated');
+
+    document.querySelectorAll('.open-note-modal').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const title = this.getAttribute('data-title');
+            const content = this.getAttribute('data-content');
+            const created = this.getAttribute('data-created');
+
+            titleField.value = title;
+            contentField.value = content;
+            createdField.textContent = `Created at ${created}`;
+        });
+    });
+});
+
 
 
 

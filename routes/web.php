@@ -13,8 +13,14 @@ Route::post('/login', [AuthController::class, 'login'])->middleware('guest'); //
 Route::get('/register', [AuthController::class, 'showRegisterForm'])->middleware('guest')->name('register');
 Route::post('/register', [AuthController::class, 'register'])->middleware('guest'); //register
 
+Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth')->name('logout');
 // Hanya bisa diakses oleh guest (belum login)
+Route::get('/login', [LoginController::class, 'showLoginForm'])->middleware('guest'); //log reg acces guest login
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->middleware('guest'); // log reg acces guest
 // Harus login
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
@@ -23,6 +29,7 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 
 /* Note */
 Route::post('/notes', [NoteController::class, 'store'])->name('notes.store');//add note
+Route::get('/notes/search', [NoteController::class, 'search'])->name('notes.search');
 Route::delete('/notes/{id}', [NoteController::class, 'destroy'])->name('notes.destroy'); //delete note
 Route::put('/notes/{id}', [NoteController::class, 'update'])->name('notes.update'); //edit note
 Route::post('/notes/{id}/toggle-pin', [NoteController::class, 'togglePin'])->name('notes.togglePin'); //pin unpin note
@@ -34,10 +41,10 @@ Route::put('/user/{id}', [DashboardController::class, 'update'])->name('user.upd
 Route::delete('/user/{id}', [DashboardController::class, 'destroy'])->name('user.destroy'); //delete user
 Route::get('/dashboard/users/search', [DashboardController::class, 'search'])->name('dashboard.users.search');//search user
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-
-
 /* page */
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
 
 Route::get('/index', function () {
     return view('index');
@@ -59,4 +66,6 @@ Route::get('/notification', function () {
     return view('notification');
 })->name('notification');
 
-
+Route::get('/dashboard', [DashboardController::class, 'dashboard'])
+    ->middleware('auth')
+    ->name('dashboard');

@@ -186,7 +186,7 @@
                 <div id="pinNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3 mb-5">
                     @foreach ($pinnedNotes as $note)
-                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-400 hover:shadow-md"
+                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-200 hover:shadow-md note-item opacity-0 translate-y-4 transition-all duration-300"
                             data-id="{{ $note->id }}" data-pinned="true">
                             <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>
                             <p class="text-sm mt-3 break-all">{{ Str::limit($note->content, 170) }}</p>
@@ -249,7 +249,7 @@
                 <div id="mainNotes"
                     class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2 md:gap-3">
                     @foreach ($otherNotes as $note)
-                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-200 hover:shadow-md"
+                        <div class="noteMain relative group flex flex-col bg-white rounded-3xl w-80 md:w-48 h-96 md:h-64 p-4 border border-gray-200 hover:shadow-md note-item opacity-0 translate-y-4 transition-all duration-300"
                             data-id="{{ $note->id }}" data-pinned="{{ $note->pinned ? 'true' : 'false' }}">
 
                             <h2 class="font-semibold">{{ Str::limit($note->title, 15) }}</h2>

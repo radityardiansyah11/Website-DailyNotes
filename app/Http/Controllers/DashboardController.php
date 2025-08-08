@@ -83,9 +83,8 @@ class DashboardController extends Controller
     }
 
     /* dashboard */
-
     public function dashboard()
-    {
+    {   
         $userCount = User::count();
         $noteCount = Note::count();
         $archivedCount = Note::where('is_archived', true)->count();

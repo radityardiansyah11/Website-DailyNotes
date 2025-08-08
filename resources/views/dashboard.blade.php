@@ -50,7 +50,8 @@
         </div>
 
         <!-- Section: Summary Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-32">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-32 note-item opacity-0 translate-y-4 transition-all duration-500">
             <div class="bg-gradient-to-r from-orange-400 to-orange-500 p-4 rounded-xl shadow-md">
                 <p class="text-md text-white">Catatan Hari ini</p>
                 <h2 class="text-2xl font-bold text-white">5</h2>
@@ -71,17 +72,21 @@
 
         <!-- Section: Catatan Terbaru -->
         <div class="mt-6">
-            <h3 class="text-lg font-semibold text-[#1E1E2D] mb-3">New Notes</h3>
+            <h3
+                class="text-lg font-semibold text-[#1E1E2D] mb-3 note-item opacity-0 translate-y-4 transition-all duration-500">
+                New Notes</h3>
             <ul class="  gap-4 grid grid-cols-1 md:grid-cols-2">
                 @forelse ($recentNotes as $note)
                     <li
-                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm">
+                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm note-item opacity-0 translate-y-4 transition-all duration-500">
                         <div>
                             <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
                             <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
                         </div>
-                        <a href="#"
-                            class="text-sm hover:font-semibold hover:underline-none text-gray-600 me-3">View</a>
+                        <a href="#" class="text-sm hover:font-semibold hover:underline-none text-gray-600 me-3"
+                            data-modal-target="newNoteDashboard" data-modal-toggle="newNoteDashboard"
+                            data-title="{{ $note->title }}" data-content="{{ $note->content }}"
+                            data-created="{{ $note->created_at->format('d M Y') }}">View</a>
                     </li>
                 @empty
                     <li class="text-sm text-gray-500">Belum ada catatan</li>
@@ -89,10 +94,37 @@
             </ul>
         </div>
 
+        <!-- modal view notes new -->
+        <div id="newNoteDashboard" tabindex="-1" aria-hidden="true"
+            class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+            <div class="relative p-4 w-full max-w-xl">
+                <div class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto ">
+                    <!-- Body -->
+                    <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
+                        <textarea id="modalNewTitle" rows="1" placeholder="Title"
+                            class="w-full  p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
+                        <textarea id="modalNewContent" placeholder="Text"
+                            class="w-full p-4 text-md bg-gray-100 placeholder:text-md focus:outline-none no-scrollbar"></textarea>
+                    </div>
+                    <!-- Footer -->
+                    <div
+                        class="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                        <p class="text-xs text-white" id="modalNewCreated"></p>
+                        <button id="" type="button"
+                            class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">
+                            kembali
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Section: Aksi Cepat -->
         <div class="mt-6">
-            <h3 class="text-lg font-semibold text-[#1E1E2D] mb-3">View </h3>
-            <div class="flex gap-3 flex-wrap">
+            <h3
+                class="text-lg font-semibold text-[#1E1E2D] mb-3 note-item opacity-0 translate-y-4 transition-all duration-500">
+                View </h3>
+            <div class="flex gap-3 flex-wrap note-item opacity-0 translate-y-4 transition-all duration-500">
                 <a href=""
                     class="flex items-center gap-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-300 transition shadow-sm">
                     <i class="fas fa-list"></i> Lihat Semua Catatan
@@ -103,21 +135,48 @@
                 </a>
             </div>
 
+            <!-- note -->
             <ul class="gap-4 grid grid-cols-1 md:grid-cols-2 mt-6">
                 @forelse ($allNotes as $note)
                     <li
-                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm">
+                        class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm note-item opacity-0 translate-y-4 transition-all duration-500">
                         <div>
                             <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
                             <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
                         </div>
-                        <a href="#"
-                            class="text-sm hover:font-semibold text-gray-600 hover:underline me-3">View</a>
+                        <a href="#" class="text-sm hover:font-semibold text-gray-600 hover:underline me-3"
+                            data-modal-target="noteDashboard" data-modal-toggle="noteDashboard">View</a>
                     </li>
                 @empty
                     <li class="text-sm text-gray-500">Belum ada catatan</li>
                 @endforelse
             </ul>
+
+            <div id="noteDashboard" tabindex="-1" aria-hidden="true"
+                class="hidden overflow-y-auto fixed top-0 right-0 left-0 z-50 justify-center items-center w-full h-full">
+                <div class="relative p-4 w-full max-w-xl">
+                    <div class="relative bg-white rounded-3xl shadow-sm max-h-[90vh] flex flex-col overflow-y-auto ">
+                        <!-- Body -->
+                        <div class="p-3 md:p-4 overflow-y-auto max-h-screen no-scrollbar">
+                            <textarea id="textAreaNoteHead" rows="1" placeholder="Title"
+                                class="w-full  p-4 text-xl rounded-t-2xl bg-gray-100 placeholder:text-xl focus:outline-none"></textarea>
+                            <textarea id="textAreaNoteContent" placeholder="Text"
+                                class="w-full p-4 text-md bg-gray-100 placeholder:text-md focus:outline-none no-scrollbar"></textarea>
+                        </div>
+                        <!-- Footer -->
+                        <div
+                            class="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
+                            <p class="text-xs text-white">created at
+                                {{-- {{$note->updated_at}} --}}
+                            </p>
+                            <button id="" type="button"
+                                class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">
+                                kembali
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     // Proses Register
-    public function register(Request $request)  
+    public function register(Request $request)
     {
         \Log::info('Masuk ke method register');
         \Log::info($request->all());
@@ -41,13 +41,26 @@ class AuthController extends Controller
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect('/home');
-        }
+    $request->session()->regenerate();
+
+    if (auth()->user()->role === 'admin') {
+        return redirect('/dashboard'); // Halaman admin
+    } else {
+        return redirect('/home'); // Halaman user biasa
+    }
+}
 
         return back()->withErrors([
             'email' => 'Email atau password salah.',
         ]);
+    }
+
+    protected function redirectTo()
+    {
+        if (auth()->user()->role === 'admin') {
+            return '/dashboard'; // halaman dashboard admin
+        }
+        return '/home'; // halaman user biasa
     }
 
     public function logout(Request $request)

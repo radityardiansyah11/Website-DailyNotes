@@ -148,7 +148,7 @@
 
         <!-- user data -->
         <div
-            class="flex h-full max-h-11 gap-2 bg-gray-100 p-2 px-4 rounded-xl items-center bg-gradient-to-b from-gray-100 to-gray-200 shadow-sm">
+            class="flex h-full max-h-11 gap-2 bg-gray-100 p-2 px-4 rounded-xl items-center bg-gradient-to-b from-gray-100 to-gray-200 shadow-sm note-item opacity-0 translate-y-4 transition-all duration-500">
             <div class="flex gap-3 items-center w-2/5">
                 <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
                 <a class="flex text-sm text-gray-500 font-semibold">User name</a>
@@ -170,9 +170,10 @@
             </div>
         </div>
 
+        {{-- list data user --}}
         <div id="userSearchResults" class="overflow-y-auto max-h-[500px] no-scrollbar">
             @foreach ($users as $user)
-                <div class="flex items-center p-2 px-4 py-4 border-b hover:bg-gray-50">
+                <div class="note-item opacity-0 translate-y-4 transition-all duration-500 flex items-center p-2 px-4 py-4 border-b hover:bg-gray-50 ">
 
                     <div class="flex items-center w-2/5 gap-3">
                         <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">
