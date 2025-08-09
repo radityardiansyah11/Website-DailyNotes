@@ -475,6 +475,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    // Tangkap semua tombol View di New Notes
+    const viewButtons = document.querySelectorAll('[data-modal-target="newNoteDashboard"]');
+
+    viewButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Ambil data dari atribut
+            const title = this.getAttribute('data-title');
+            const content = this.getAttribute('data-content');
+            const created = this.getAttribute('data-created');
+
+            // Masukkan ke modal
+            document.getElementById('modalNewTitle').value = title;
+            document.getElementById('modalNewContent').value = content;
+            document.getElementById('modalNewCreated').innerText = created;
+        });
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    // Tangkap semua tombol View di New Notes
+    const viewNoteButtons = document.querySelectorAll('[data-modal-target="noteDashboard"]');
+
+    viewNoteButtons.forEach(button => {
+        button.addEventListener('click', function () {
+            // Ambil data dari atribut
+            const title = this.getAttribute('data-title');
+            const content = this.getAttribute('data-content');
+            const created = this.getAttribute('data-created');
+
+            // Masukkan ke modal
+            document.getElementById('textAreaNoteHead').value = title;
+            document.getElementById('textAreaNoteContent').value = content;
+            document.getElementById('createNote').innerText = created;
+        });
+    });
+});
 
 
 

@@ -133,15 +133,13 @@
                                         <i class="fas fa-sign-out-alt text-base"></i> Logout
                                     </button>
                                     </form>
-
                                 </div>
-
                             </div>
 
                             <div class="pb-90 text-xs text-gray-400 flex justify-center gap-2">
-                                <span>Kebijakan Privasi</span>
+                                <span>Privacy Policy</span>
                                 <span>•</span>
-                                <span>Persyaratan Layanan</span>
+                                <span>Terms of Service</span>
                             </div>
                         </div>
 
@@ -328,7 +326,7 @@
                                 </p>
                                 <button id="saveNoteBtn" type="button"
                                     class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">
-                                    Simpan
+                                    Save
                                 </button>
                             </div>
                         </div>

@@ -87,7 +87,7 @@
                             <!-- Username -->
                             <div class="flex flex-col">
                                 <label for="addName" class="mb-1 text-sm font-medium text-gray-700">Username</label>
-                                <input type="text" name="name" id="addName" placeholder="Masukkan nama"
+                                <input type="text" name="name" id="addName" placeholder="Username"
                                     class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none"
                                     required>
                             </div>
@@ -95,7 +95,7 @@
                             <!-- Password -->
                             <div class="flex flex-col">
                                 <label for="addPassword" class="mb-1 text-sm font-medium text-gray-700">Password</label>
-                                <input type="password" name="password" id="addPassword" placeholder="Masukkan password"
+                                <input type="password" name="password" id="addPassword" placeholder="Password"
                                     class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none"
                                     required>
                             </div>
@@ -103,7 +103,7 @@
                             <!-- Email -->
                             <div class="flex flex-col">
                                 <label for="addEmail" class="mb-1 text-sm font-medium text-gray-700">Email</label>
-                                <input type="email" name="email" id="addEmail" placeholder="Masukkan email"
+                                <input type="email" name="email" id="addEmail" placeholder="Email"
                                     class="p-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-orange-500 focus:outline-none"
                                     required>
                             </div>
@@ -173,7 +173,8 @@
         {{-- list data user --}}
         <div id="userSearchResults" class="overflow-y-auto max-h-[500px] no-scrollbar">
             @foreach ($users as $user)
-                <div class="note-item opacity-0 translate-y-4 transition-all duration-500 flex items-center p-2 px-4 py-4 border-b hover:bg-gray-50 ">
+                <div
+                    class="note-item opacity-0 translate-y-4 transition-all duration-500 flex items-center p-2 px-4 py-4 border-b hover:bg-gray-50 ">
 
                     <div class="flex items-center w-2/5 gap-3">
                         <input type="checkbox" class="flex w-5 h-5 rounded-full accent-orange-600">

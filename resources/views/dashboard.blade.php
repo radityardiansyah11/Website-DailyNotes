@@ -53,19 +53,19 @@
         <div
             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 h-32 note-item opacity-0 translate-y-4 transition-all duration-500">
             <div class="bg-gradient-to-r from-orange-400 to-orange-500 p-4 rounded-xl shadow-md">
-                <p class="text-md text-white">Catatan Hari ini</p>
+                <p class="text-md text-white">Today Note Added</p>
                 <h2 class="text-2xl font-bold text-white">5</h2>
             </div>
             <div class="bg-gradient-to-r from-purple-400 to-purple-500 p-4 rounded-xl shadow-md">
-                <p class="text-md text-white">Total Catatan</p>
+                <p class="text-md text-white">Notes Count</p>
                 <h2 class="text-2xl font-bold text-white">{{ $noteCount }}</h2>
             </div>
             <div class="bg-gradient-to-r from-blue-400 to-blue-500 p-4 rounded-xl shadow-md">
-                <p class="text-md text-white">Catatan Diarsipkan</p>
+                <p class="text-md text-white">Archived Notes</p>
                 <h2 class="text-2xl font-bold text-white">{{ $archivedCount }}</h2>
             </div>
             <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 p-4 rounded-xl shadow-md">
-                <p class="text-md text-white">Total Pengguna</p>
+                <p class="text-md text-white">Users Count</p>
                 <h2 class="text-2xl font-bold text-white">{{ $userCount }}</h2>
             </div>
         </div>
@@ -80,8 +80,8 @@
                     <li
                         class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm note-item opacity-0 translate-y-4 transition-all duration-500">
                         <div>
-                            <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
-                            <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
+                            <p class="font-medium text-gray-800">Title Notes: {{ $note->title }}</p>
+                            <p class="text-xs text-gray-500">Added at: {{ $note->created_at->format('d M Y') }}</p>
                         </div>
                         <a href="#" class="text-sm hover:font-semibold hover:underline-none text-gray-600 me-3"
                             data-modal-target="newNoteDashboard" data-modal-toggle="newNoteDashboard"
@@ -112,7 +112,7 @@
                         <p class="text-xs text-white" id="modalNewCreated"></p>
                         <button id="" type="button"
                             class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">
-                            kembali
+                            Back
                         </button>
                     </div>
                 </div>
@@ -127,11 +127,11 @@
             <div class="flex gap-3 flex-wrap note-item opacity-0 translate-y-4 transition-all duration-500">
                 <a href=""
                     class="flex items-center gap-2 bg-gradient-to-r from-blue-400 to-blue-500 text-white text-sm font-medium px-4 py-2 rounded-md hover:bg-gray-300 transition shadow-sm">
-                    <i class="fas fa-list"></i> Lihat Semua Catatan
+                    <i class="fas fa-list"></i> View All Notes
                 </a>
                 <a href=""
                     class="flex items-center gap-2 bg-gradient-to-r from-gray-200 to-gray-300 text-gray-500 text-sm font-medium px-4 py-2 rounded-md hover:from-blue-400 hover:to-blue-500 hover:text-white transition">
-                    <i class="fas fa-archive"></i> Lihat Arsip
+                    <i class="fas fa-archive"></i> View All Archive
                 </a>
             </div>
 
@@ -141,11 +141,13 @@
                     <li
                         class="bg-gradient-to-r from-gray-100 to-gray-200 hover:from-gray-200 hover:to-gray-300 hover:shadow-md rounded-md p-3 flex justify-between items-center shadow-sm note-item opacity-0 translate-y-4 transition-all duration-500">
                         <div>
-                            <p class="font-medium text-gray-800">Judul Catatan: {{ $note->title }}</p>
-                            <p class="text-xs text-gray-500">Ditambahkan: {{ $note->created_at->format('d M Y') }}</p>
+                            <p class="font-medium text-gray-800">Title Notes: {{ $note->title }}</p>
+                            <p class="text-xs text-gray-500">Added at: {{ $note->created_at->format('d M Y') }}</p>
                         </div>
                         <a href="#" class="text-sm hover:font-semibold text-gray-600 hover:underline me-3"
-                            data-modal-target="noteDashboard" data-modal-toggle="noteDashboard">View</a>
+                            data-modal-target="noteDashboard" data-modal-toggle="noteDashboard"
+                            data-title="{{ $note->title }}" data-content="{{ $note->content }}"
+                            data-created="{{ $note->created_at->format('d M Y') }}">View</a>
                     </li>
                 @empty
                     <li class="text-sm text-gray-500">Belum ada catatan</li>
@@ -166,12 +168,12 @@
                         <!-- Footer -->
                         <div
                             class="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-red-600 to-orange-600 rounded-b-3xl">
-                            <p class="text-xs text-white">created at
+                            <p class="text-xs text-white" id="createNote">created at {{ $note->created_at->format('d M Y') }}
                                 {{-- {{$note->updated_at}} --}}
                             </p>
                             <button id="" type="button"
                                 class="bg-white/10 hover:bg-white/20 text-white font-semibold px-5 py-2 rounded-lg transition">
-                                kembali
+                                Back
                             </button>
                         </div>
                     </div>
